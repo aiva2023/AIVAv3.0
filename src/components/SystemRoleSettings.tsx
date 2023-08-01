@@ -1,4 +1,4 @@
-import { createSignal, Show, onCleanup } from 'solid-js';
+import { createSignal, createEffect, Show } from 'solid-js';
 import type { Accessor, Setter } from 'solid-js';
 import IconEnv from './icons/Env';
 
@@ -14,11 +14,7 @@ export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
 
   const [showSuggestions, setShowSuggestions] = createSignal(false);
-  const suggestions = {
-    "Suggestion 1": "Act as a doctor",
-    "Suggestion 2": "Act as a Musician",
-    "Suggestion 3": "Act as a tutor",
-  }; // Replace this with your actual suggestions
+  const [suggestions, setSuggestions] = createSignal({});
 
   const handleInput = (e) => {
     if (e.target.value.slice(-1) === "/") {
@@ -29,7 +25,7 @@ export default (props: Props) => {
   };
 
   const handleSuggestionClick = (suggestion) => {
-    systemInputRef.value = systemInputRef.value.slice(0, -1) + suggestions[suggestion]; // Replace the "/" with the suggestion
+    systemInputRef.value = systemInputRef.value.slice(0, -1) + suggestions()[suggestion]; // Replace the "/" with the suggestion
     setShowSuggestions(false);
   };
 
@@ -37,6 +33,12 @@ export default (props: Props) => {
     props.setCurrentSystemRoleSettings(systemInputRef.value);
     props.setSystemRoleEditing(false);
   };
+
+  createEffect(async () => {
+    const response = await fetch('UserRoles.txt'); // replace with the actual path to your UserRoles.txt file
+    const data = await response.json(); // or use .text() if the data is plain text
+    setSuggestions(data);
+  });
 
   return (
     <div class="my-4">
@@ -94,7 +96,7 @@ export default (props: Props) => {
             />
             <Show when={showSuggestions()}>
               <div class="suggestion-popup">
-                {Object.keys(suggestions).map((suggestion, index) => (
+                {Object.keys(suggestions()).map((suggestion, index) => (
                   <div key={index} onClick={() => handleSuggestionClick(suggestion)}>
                     {suggestion}
                   </div>
