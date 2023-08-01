@@ -1,22 +1,33 @@
-import { Show } from 'solid-js'
-import type { Accessor, Setter } from 'solid-js'
-import IconEnv from './icons/Env'
+import { createSignal, Show } from 'solid-js';
+import type { Accessor, Setter } from 'solid-js';
+import IconEnv from './icons/Env';
 
 interface Props {
-  canEdit: Accessor<boolean>
-  systemRoleEditing: Accessor<boolean>
-  setSystemRoleEditing: Setter<boolean>
-  currentSystemRoleSettings: Accessor<string>
-  setCurrentSystemRoleSettings: Setter<string>
+  canEdit: Accessor<boolean>;
+  systemRoleEditing: Accessor<boolean>;
+  setSystemRoleEditing: Setter<boolean>;
+  currentSystemRoleSettings: Accessor<string>;
+  setCurrentSystemRoleSettings: Setter<string>;
 }
 
 export default (props: Props) => {
-  let systemInputRef: HTMLTextAreaElement
+  let systemInputRef: HTMLTextAreaElement;
+
+  const [showSuggestions, setShowSuggestions] = createSignal(false);
+  const suggestions = ["Suggestion 1", "Suggestion 2", "Suggestion 3"]; // Replace this with your actual suggestions
+
+  const handleInput = (e) => {
+    if (e.target.value.slice(-1) === "/") {
+      setShowSuggestions(true);
+    } else {
+      setShowSuggestions(false);
+    }
+  };
 
   const handleButtonClick = () => {
-    props.setCurrentSystemRoleSettings(systemInputRef.value)
-    props.setSystemRoleEditing(false)
-  }
+    props.setCurrentSystemRoleSettings(systemInputRef.value);
+    props.setSystemRoleEditing(false);
+  };
 
   return (
     <div class="my-4">
@@ -41,7 +52,7 @@ export default (props: Props) => {
       </Show>
       <Show when={props.systemRoleEditing() && props.canEdit()}>
         <div>
-          <div class="fi gap-1 op-50 dark:op-60">
+        <div class="fi gap-1 op-50 dark:op-60">
             <IconEnv />
             <span>System Role:</span>
           </div>
@@ -49,12 +60,20 @@ export default (props: Props) => {
           <div>
             <textarea
               ref={systemInputRef!}
+              onInput={handleInput}
               placeholder="You are a helpful assistant, answer as concisely as possible...."
               autocomplete="off"
               autofocus
               rows="3"
               gen-textarea
             />
+            <Show when={showSuggestions()}>
+              <div>
+                {suggestions.map((suggestion, index) => (
+                  <div key={index}>{suggestion}</div>
+                ))}
+              </div>
+            </Show>
           </div>
           <button onClick={handleButtonClick} gen-slate-btn>
             Set
@@ -62,5 +81,5 @@ export default (props: Props) => {
         </div>
       </Show>
     </div>
-  )
-}
+  );
+};
