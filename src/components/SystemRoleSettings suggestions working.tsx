@@ -1,4 +1,4 @@
-import { createSignal, Show } from 'solid-js';
+import { createSignal, Show, onCleanup } from 'solid-js';
 import type { Accessor, Setter } from 'solid-js';
 import IconEnv from './icons/Env';
 
@@ -14,7 +14,7 @@ export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
 
   const [showSuggestions, setShowSuggestions] = createSignal(false);
-  const suggestions = ["Suggestion 1", "Suggestion 2", "Suggestion 3","Suggestion 4", "Suggestion 5", "Suggestion 6"]; // Replace this with your actual suggestions
+  const suggestions = ["Suggestion 1", "Suggestion 2", "Suggestion 3"]; // Replace this with your actual suggestions
 
   const handleInput = (e) => {
     if (e.target.value.slice(-1) === "/") {
@@ -22,6 +22,11 @@ export default (props: Props) => {
     } else {
       setShowSuggestions(false);
     }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    systemInputRef.value = systemInputRef.value.slice(0, -1) + suggestion; // Replace the "/" with the suggestion
+    setShowSuggestions(false);
   };
 
   const handleButtonClick = () => {
@@ -70,7 +75,9 @@ export default (props: Props) => {
             <Show when={showSuggestions()}>
               <div>
                 {suggestions.map((suggestion, index) => (
-                  <div key={index}>{suggestion}</div>
+                  <div key={index} onClick={() => handleSuggestionClick(suggestion)}>
+                    {suggestion}
+                  </div>
                 ))}
               </div>
             </Show>
