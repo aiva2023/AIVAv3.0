@@ -1,60 +1,25 @@
-import { createSignal, Show, onCleanup } from 'solid-js';
-import type { Accessor, Setter } from 'solid-js';
-import IconEnv from './icons/Env';
+import { Show } from 'solid-js'
+import type { Accessor, Setter } from 'solid-js'
+import IconEnv from './icons/Env'
 
 interface Props {
-  canEdit: Accessor<boolean>;
-  systemRoleEditing: Accessor<boolean>;
-  setSystemRoleEditing: Setter<boolean>;
-  currentSystemRoleSettings: Accessor<string>;
-  setCurrentSystemRoleSettings: Setter<string>;
+  canEdit: Accessor<boolean>
+  systemRoleEditing: Accessor<boolean>
+  setSystemRoleEditing: Setter<boolean>
+  currentSystemRoleSettings: Accessor<string>
+  setCurrentSystemRoleSettings: Setter<string>
 }
 
 export default (props: Props) => {
-  let systemInputRef: HTMLTextAreaElement;
-
-  const [showSuggestions, setShowSuggestions] = createSignal(false);
-  const suggestions = {
-    "Suggestion 1": "Act as a doctor",
-    "Suggestion 2": "Act as a Musician",
-    "Suggestion 3": "Act as a tutor",
-  }; // Replace this with your actual suggestions
-
-  const handleInput = (e) => {
-    if (e.target.value.slice(-1) === "/") {
-      setShowSuggestions(true);
-    } else {
-      setShowSuggestions(false);
-    }
-  };
-
-  const handleSuggestionClick = (suggestion) => {
-    systemInputRef.value = systemInputRef.value.slice(0, -1) + suggestions[suggestion]; // Replace the "/" with the suggestion
-    setShowSuggestions(false);
-  };
+  let systemInputRef: HTMLTextAreaElement
 
   const handleButtonClick = () => {
-    props.setCurrentSystemRoleSettings(systemInputRef.value);
-    props.setSystemRoleEditing(false);
-  };
+    props.setCurrentSystemRoleSettings(systemInputRef.value)
+    props.setSystemRoleEditing(false)
+  }
 
   return (
     <div class="my-4">
-      <style>
-        {`
-          .suggestion-popup {
-            position: absolute;
-            z-index: 1;
-            max-height: 200px;
-            overflow-y: auto;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            /* Add additional styling as needed */
-          }
-        `}
-      </style>
-
       <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
           <div>
@@ -76,34 +41,20 @@ export default (props: Props) => {
       </Show>
       <Show when={props.systemRoleEditing() && props.canEdit()}>
         <div>
-
-        <div class="fi gap-1 op-50 dark:op-60">
+          <div class="fi gap-1 op-50 dark:op-60">
             <IconEnv />
             <span>System Role:</span>
           </div>
-          <p class="my-2 leading-normal text-sm op-50 dark:op-60">Kindly instruct the assistant and set the behavior of the assistant.</p>
-      <Show when={props.systemRoleEditing() && props.canEdit()}>
-        <div>
-          {/* Your existing JSX here */}
+          <p class="my-2 leading-normal text-sm op-50 dark:op-60">Gently instruct the assistant and set the behavior of the assistant.</p>
           <div>
             <textarea
               ref={systemInputRef!}
-              onInput={handleInput}
               placeholder="You are a helpful assistant, answer as concisely as possible...."
               autocomplete="off"
               autofocus
               rows="3"
               gen-textarea
             />
-            <Show when={showSuggestions()}>
-              <div class="suggestion-popup">
-                {Object.keys(suggestions).map((suggestion, index) => (
-                  <div key={index} onClick={() => handleSuggestionClick(suggestion)}>
-                    {suggestion}
-                  </div>
-                ))}
-              </div>
-            </Show>
           </div>
           <button onClick={handleButtonClick} gen-slate-btn>
             Set
@@ -111,5 +62,5 @@ export default (props: Props) => {
         </div>
       </Show>
     </div>
-  );
-};
+  )
+}
