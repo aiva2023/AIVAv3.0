@@ -35,7 +35,7 @@ export default (props: Props) => {
   };
 
   createEffect(async () => {
-    const response = await fetch('UserRoles.txt'); // replace with the actual path to your UserRoles.txt file
+    const response = await fetch('/UserRoles.txt'); // replace with the actual path to your UserRoles.txt file
     const data = await response.json(); // or use .text() if the data is plain text
     setSuggestions(data);
   });
