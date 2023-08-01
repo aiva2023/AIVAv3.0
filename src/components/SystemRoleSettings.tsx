@@ -92,16 +92,3 @@ export default (props: Props) => {
   );
 };
 
-
-<style>
-  .suggestion-popup {
-    position: absolute;
-    z-index: 1;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    /* Add additional styling as needed */
-  }
-</style>
