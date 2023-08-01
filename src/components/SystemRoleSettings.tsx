@@ -46,6 +46,7 @@ export default (props: Props) => {
             background-color: white;
             border: 1px solid #ccc;
             padding: 10px;
+            color: #000;
             /* Add additional styling as needed */
           }
           .suggestion-popup div {
