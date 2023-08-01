@@ -36,30 +36,28 @@ export default (props: Props) => {
 
   return (
     <div class="my-4">
-    <style>
-      {`
-        .suggestion-popup {
-          position: absolute;
-          z-index: 1;
-          max-height: 200px;
-          overflow-y: auto;
-          background-color: white;
-          border: 1px solid #ccc;
-          padding: 10px;
-          /* Add additional styling as needed */
-        }
-        .suggestion-popup div:hover {
-          background-color: #ddd; /* Change as needed */
-        }
-        .close-button {
-          position: absolute;
-          right: 10px;
-          top: 10px;
-          cursor: pointer;
-          /* Add additional styling as needed */
-        }
-      `}
-    </style>
+      <style>
+        {`
+          .suggestion-popup {
+            position: absolute;
+            z-index: 1;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            /* Add additional styling as needed */
+          }
+          .suggestion-popup div {
+            transition: transform 0.3s ease;
+          }
+          .suggestion-popup div:hover {
+            transform: scale(1.1);
+            background-color: #ddd; /* Change color as needed */
+            cursor: pointer;
+          }
+        `}
+      </style>
 
       <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
@@ -82,7 +80,7 @@ export default (props: Props) => {
       </Show>
       <Show when={props.systemRoleEditing() && props.canEdit()}>
         <div>
- 
+
         <div class="fi gap-1 op-50 dark:op-60">
             <IconEnv />
             <span>System Role:</span>
@@ -98,16 +96,15 @@ export default (props: Props) => {
               rows="3"
               gen-textarea
             />
-    <Show when={showSuggestions()}>
-      <div class="suggestion-popup">
-        <div class="close-button" onClick={() => setShowSuggestions(false)}>X</div>
-        {Object.keys(suggestions).map((suggestion, index) => (
-          <div key={index} onClick={() => handleSuggestionClick(suggestion)}>
-            {suggestion}
-          </div>
-        ))}
-      </div>
-    </Show>
+            <Show when={showSuggestions()}>
+              <div class="suggestion-popup">
+                {Object.keys(suggestions).map((suggestion, index) => (
+                  <div key={index} onClick={() => handleSuggestionClick(suggestion)}>
+                    {suggestion}
+                  </div>
+                ))}
+              </div>
+            </Show>
           </div>
           <button onClick={handleButtonClick} gen-slate-btn>
             Set
