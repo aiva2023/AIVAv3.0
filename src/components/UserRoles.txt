@@ -1,1 +1,5 @@
-"Suggestion 1": "Act as a doctor"
+{
+  "Suggestion 1": "Act as a doctor",
+  "Suggestion 2": "Act as a Musician",
+  "Suggestion 3": "Act as a tutor"
+}
