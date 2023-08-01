@@ -14,7 +14,7 @@ export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
 
   const [showSuggestions, setShowSuggestions] = createSignal(false);
-  const suggestions = ["Suggestion 1", "Suggestion 2", "Suggestion 3"]; // Replace this with your actual suggestions
+  const suggestions = ["Suggestion 1", "Suggestion 2", "Suggestion 3","Suggestion 1", "Suggestion 2", "Suggestion 3","Suggestion 1", "Suggestion 2", "Suggestion 3","Suggestion 1", "Suggestion 2", "Suggestion 3"]; // Replace this with your actual suggestions
 
   const handleInput = (e) => {
     if (e.target.value.slice(-1) === "/") {
