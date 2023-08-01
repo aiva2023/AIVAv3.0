@@ -1,1 +1,1 @@
-"Suggestion 1": "Act as a doctor",
+"Suggestion 1": "Act as a doctor"
