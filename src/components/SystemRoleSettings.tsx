@@ -52,7 +52,7 @@ export default (props: Props) => {
             transition: transform 0.3s ease;
           }
           .suggestion-popup div:hover {
-            transform: scale(1.1);
+            transform: scale(1.03);
             background-color: #ddd; /* Change color as needed */
             cursor: pointer;
           }
