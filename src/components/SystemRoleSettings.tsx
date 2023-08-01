@@ -56,6 +56,15 @@ export default (props: Props) => {
             background-color: #ddd; /* Change color as needed */
             cursor: pointer;
           }
+          @media (prefers-color-scheme: dark) {
+            .suggestion-popup {
+              background-color: #333;
+              color: #fff;
+            }
+            .suggestion-popup div:hover {
+              background-color: #555;
+            }
+          }
         `}
       </style>
 
@@ -90,7 +99,7 @@ export default (props: Props) => {
             <textarea
               ref={systemInputRef!}
               onInput={handleInput}
-              placeholder="You are a helpful assistant, answer as concisely as possible...."
+              placeholder="Type / to browse for prompt templates"
               autocomplete="off"
               autofocus
               rows="3"
