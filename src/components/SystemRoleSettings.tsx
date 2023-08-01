@@ -61,6 +61,9 @@ export default (props: Props) => {
               background-color: #333;
               color: #fff;
             }
+            .suggestion-popup div {
+              color: #000; /* Font color in dark theme */
+            }
             .suggestion-popup div:hover {
               background-color: #555;
             }
