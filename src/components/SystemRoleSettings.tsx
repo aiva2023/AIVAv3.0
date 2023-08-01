@@ -14,7 +14,11 @@ export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
 
   const [showSuggestions, setShowSuggestions] = createSignal(false);
-  const suggestions = ["Suggestion 1", "Suggestion 2", "Suggestion 3","Suggestion 1", "Suggestion 2", "Suggestion 3","Suggestion 1", "Suggestion 2", "Suggestion 3","Suggestion 1", "Suggestion 2", "Suggestion 3"]; // Replace this with your actual suggestions
+  const suggestions = {
+    "Suggestion 1": "Act as a doctor",
+    "Suggestion 2": "Act as a Musician",
+    "Suggestion 3": "Act as a tutor",
+  }; // Replace this with your actual suggestions
 
   const handleInput = (e) => {
     if (e.target.value.slice(-1) === "/") {
@@ -25,7 +29,7 @@ export default (props: Props) => {
   };
 
   const handleSuggestionClick = (suggestion) => {
-    systemInputRef.value = systemInputRef.value.slice(0, -1) + suggestion; // Replace the "/" with the suggestion
+    systemInputRef.value = systemInputRef.value.slice(0, -1) + suggestions[suggestion]; // Replace the "/" with the suggestion
     setShowSuggestions(false);
   };
 
@@ -90,7 +94,7 @@ export default (props: Props) => {
             />
             <Show when={showSuggestions()}>
               <div class="suggestion-popup">
-                {suggestions.map((suggestion, index) => (
+                {Object.keys(suggestions).map((suggestion, index) => (
                   <div key={index} onClick={() => handleSuggestionClick(suggestion)}>
                     {suggestion}
                   </div>
