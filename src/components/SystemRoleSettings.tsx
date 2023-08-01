@@ -36,8 +36,22 @@ export default (props: Props) => {
 
   return (
     <div class="my-4">
+      <style>
+        {`
+          .suggestion-popup {
+            position: absolute;
+            z-index: 1;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            /* Add additional styling as needed */
+          }
+        `}
+      </style>
 
-<Show when={!props.systemRoleEditing()}>
+      <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
           <div>
             <div class="fi gap-1 op-50 dark:op-60">
@@ -58,6 +72,7 @@ export default (props: Props) => {
       </Show>
       <Show when={props.systemRoleEditing() && props.canEdit()}>
         <div>
+
         <div class="fi gap-1 op-50 dark:op-60">
             <IconEnv />
             <span>System Role:</span>
@@ -91,4 +106,3 @@ export default (props: Props) => {
     </div>
   );
 };
-
