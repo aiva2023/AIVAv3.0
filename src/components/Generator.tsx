@@ -189,6 +189,26 @@ export default () => {
 
   return (
     <div my-6>
+      <style>
+        .upload-btn {
+          display: inline-block;
+          padding: 6px 12px;
+          cursor: pointer;
+          background-color: #4CAF50; /* Green */
+          border: none;
+          color: white;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+        }
+        .upload-btn:hover {
+          background-color: #45a049;
+        }
+      </style>
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
@@ -249,26 +269,6 @@ export default () => {
           </button>
         </div>
       </Show>
-      <style>
-        .upload-btn {
-          display: inline-block;
-          padding: 6px 12px;
-          cursor: pointer;
-          background-color: #4CAF50; /* Green */
-          border: none;
-          color: white;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          transition-duration: 0.4s;
-          cursor: pointer;
-        }
-        .upload-btn:hover {
-          background-color: #45a049;
-        }
-      </style>
     </div>
   )
 }
