@@ -1,13 +1,10 @@
-
 .input-area {
-    position: relative;
-}
-.upload-btn {
-    position: absolute;
-    left: 10px;
-    top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .upload-btn {
     display: inline-block;
-    padding: 6px 6px;
+    padding: 6px 12px;
     cursor: pointer;
     background-color: #4CAF50; /* Green */
     border: none;
@@ -18,8 +15,8 @@
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 50%;
-}
-.upload-btn:hover {
+    margin-right: 10px;
+  }
+  .upload-btn:hover {
     background-color: #45a049;
-}
-
+  }
