@@ -225,9 +225,48 @@ export default () => {
       >
         <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
           <input type="file" accept="image/*" ref={fileInputRef!} style="display: none;" onInput={handleImageUpload} />
-          <button onClick={() => fileInputRef.click()} disabled={systemRoleEditing()} class="upload-btn">
-          +
-          </button>
+
+          You can make these changes by updating your CSS and JSX code.
+
+For the CSS:
+
+Remove the text from the button and replace it with a "+" symbol.
+Add CSS to make the button round and smaller.
+Position the button inside the textarea.
+Here's the updated CSS:
+
+css
+Copy code
+.upload-btn {
+  display: inline-block;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.upload-btn:hover {
+  background-color: #45a049;
+}
+Then, in your JSX code, replace the "Upload Image" text with the "+" symbol:
+
+jsx
+Copy code
+<button onClick={() => fileInputRef.click()} disabled={systemRoleEditing()} class="upload-btn">
+  +
+</button>
           <textarea
             ref={inputRef!}
             disabled={systemRoleEditing()}
