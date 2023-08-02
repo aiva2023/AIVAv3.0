@@ -1,4 +1,18 @@
+import { Accessor, createSignal } from 'solid-js'
+import type { ChatMessage } from '@/types'
+import MarkdownIt from 'markdown-it'
+// @ts-ignore
+import mdKatex from 'markdown-it-katex'
+import mdHighlight from 'markdown-it-highlightjs'
+import IconRefresh from './icons/Refresh'
+import { useClipboard, useEventListener } from 'solidjs-use'
 
+interface Props {
+  role: ChatMessage['role']
+  message: Accessor<string> | string
+  showRetry?: Accessor<boolean>
+  onRetry?: () => void
+}
 
 export default ({ role, message, showRetry, onRetry }: Props) => {
   const roleClass = {
@@ -8,6 +22,8 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
   }
   const [source] = createSignal('')
   const { copy, copied } = useClipboard({ source, copiedDuring: 1000 })
+  const [isLoading, setIsLoading] = createSignal(false);
+  const [errorMessage, setErrorMessage] = createSignal("");
 
   useEventListener('click', (e) => {
     const el = e.target as HTMLElement
@@ -22,6 +38,18 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
       copy(code)
     }
   })
+
+  const handleImageUpload = (event: Event) => {
+    const file = (event.target as HTMLInputElement).files[0];
+    if (!file) {
+      setErrorMessage("No file selected!");
+      return;
+    }
+    setIsLoading(true);
+    setErrorMessage("");
+    console.log(file);  // For now, we'll just log the selected file.
+    setIsLoading(false);
+  };
 
   const htmlString = () => {
     const md = MarkdownIt({
@@ -53,13 +81,6 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     return ''
   }
 
-
-  // This function will be called when the user selects an image.
-  const handleImageUpload = (event: Event) => {
-    const file = (event.target as HTMLInputElement).files[0];
-    console.log(file);  // For now, we'll just log the selected file.
-  };
-
   return (
     <div class="py-2 -mx-4 px-4 transition-colors md:hover:bg-slate/3">
       <div class="flex gap-3 rounded-lg" class:op-75={role === 'user'}>
@@ -72,12 +93,15 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
             <IconRefresh />
             <span>Regenerate</span>
           </div>
-
+        </div>
+      )}
       {role === 'user' && (
         <div>
           <input type="file" accept="image/*" onInput={handleImageUpload} />
+          {isLoading() && <p>Loading...</p>}
+          {errorMessage() && <p>Error: {errorMessage()}</p>}
         </div>
       )}
     </div>
-  );
-};
+  )
+}
