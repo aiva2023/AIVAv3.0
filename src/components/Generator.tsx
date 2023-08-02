@@ -226,7 +226,7 @@ export default () => {
         <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
           <input type="file" accept="image/*" ref={fileInputRef!} style="display: none;" onInput={handleImageUpload} />
           <button onClick={() => fileInputRef.click()} disabled={systemRoleEditing()} class="upload-btn">
-            Upload Image
+          +
           </button>
           <textarea
             ref={inputRef!}
