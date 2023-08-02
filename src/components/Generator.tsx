@@ -18,7 +18,7 @@ export default () => {
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
   const [firstMessageSent, setFirstMessageSent] = createSignal(false) // Added state variable for first message
-  const [showGreeting, setShowGreeting] = createSignal(true);
+  
 
   // ... rest of your existing code ...
 
@@ -27,8 +27,6 @@ export default () => {
     if (!inputValue) {
       return
     }
-    // Hide the greeting message when the button is clicked
-    setShowGreeting(false);
     // @ts-ignore
     if (window?.umami) umami.trackEvent('chat_generate')
     inputRef.value = ''
@@ -174,7 +172,7 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
-      <Show when={showGreeting()}>
+      <Show when={!firstMessageSent()}>
         <h1>Welcome! Send your first message to start.</h1>
         <div class="button-container">
           <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Button 1</button>
