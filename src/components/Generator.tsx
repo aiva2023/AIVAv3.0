@@ -6,6 +6,7 @@ import SystemRoleSettings from './SystemRoleSettings'
 import ErrorMessageItem from './ErrorMessageItem'
 import { generateSignature } from '@/utils/auth'
 import { useThrottleFn } from 'solidjs-use'
+import './Generator.css';
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -171,13 +172,6 @@ export default () => {
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
       <Show when={!firstMessageSent()}>
-        <style>
-        .button-container {
-          display: flex;
-          overflow-x: auto;
-          gap: 10px;
-        }
-        </style>
         <h1>Welcome! Send your first message to start.</h1>
         <div class="button-container">
           <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Button 1</button>
