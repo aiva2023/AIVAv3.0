@@ -176,16 +176,16 @@ export default () => {
         <h1>Welcome! Send your first message to start or choose from the suggestions below:</h1>
         <div class="button-container">
           <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>AI Draw</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Professor</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Life Coach</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Dietitian</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>ESL Tutor</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Sell Me This Pen</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Self-hel Book</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Grammar Correction</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Plagiarism Checker</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Financial Planning</button>
         </div>
       </Show>
 
