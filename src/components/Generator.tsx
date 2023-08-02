@@ -39,25 +39,6 @@ export default () => {
     setFirstMessageSent(true) // Set firstMessageSent to true after user sends message
   }
 
-
-  const handleButtonClick = async () => {
-    const inputValue = inputRef.value
-    if (!inputValue) {
-      return
-    }
-    // @ts-ignore
-    if (window?.umami) umami.trackEvent('chat_generate')
-    inputRef.value = ''
-    setMessageList([
-      ...messageList(),
-      {
-        role: 'user',
-        content: inputValue,
-      },
-    ])
-    requestWithLatestMessage()
-  }
-
   const smoothToBottom = useThrottleFn(() => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
   }, 300, false, true)
