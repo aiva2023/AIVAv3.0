@@ -171,7 +171,7 @@ export default () => {
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
       <Show when={!firstMessageSent()}>
-        <p>Welcome! Send your first message to start.</p>
+        <h1>Welcome! Send your first message to start.</h1>
         <button class="gen-slate-btn">Button 1</button>
         <button class="gen-slate-btn">Button 2</button>
         <button class="gen-slate-btn">Button 3</button>
