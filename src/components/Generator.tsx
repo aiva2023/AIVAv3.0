@@ -173,19 +173,19 @@ export default () => {
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
       <Show when={!firstMessageSent()}>
-        <h1>Welcome! Send your first message to start.</h1>
+        <h1>Welcome! Send your first message to start or choose from the suggestions below:</h1>
         <div class="button-container">
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Button 1</button>
-          <button class="gen-slate-btn">Button 2</button>
-          <button class="gen-slate-btn">Button 3</button>
-          <button class="gen-slate-btn">Button 4</button>
-          <button class="gen-slate-btn">Button 5</button>
-          <button class="gen-slate-btn">Button 6</button>
-          <button class="gen-slate-btn">Button 7</button>
-          <button class="gen-slate-btn">Button 8</button>
-          <button class="gen-slate-btn">Button 9</button>
-          <button class="gen-slate-btn">Button 10</button>
-          <button class="gen-slate-btn">Button 11</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
         </div>
       </Show>
 
