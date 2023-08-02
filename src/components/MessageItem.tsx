@@ -100,7 +100,7 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
           <label for="fileUpload" class="customFileUpload">
             Upload Image
           </label>
-          <input id="fileUpload" type="file" accept="image/*" onInput={handleImageUpload} style="display:none;" />
+          <input id="fileUpload" type="file" accept="image/*" onInput={handleImageUpload} " />
           {isLoading() && <p>Loading...</p>}
           {errorMessage() && <p>Error: {errorMessage()}</p>}
         </div>
