@@ -82,50 +82,51 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
   }
 
   return (
-    <div class="py-2 -mx-4 px-4 transition-colors md:hover:bg-slate/3">
-      <div class="flex gap-3 rounded-lg" class:op-75={role === 'user'}>
-        <div class={`shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${roleClass[role]}`}></div>
-        <div class="message prose break-words overflow-hidden" innerHTML={htmlString()} />
-      </div>
-      {showRetry?.() && onRetry && (
-        <div class="fie px-3 mb-2">
-          <div onClick={onRetry} class="gpt-retry-btn">
-            <IconRefresh />
-            <span>Regenerate</span>
+    <>
+      <style>
+      {`
+        .customFileUpload {
+          display: inline-block;
+          padding: 6px 12px;
+          cursor: pointer;
+          background-color: #4CAF50; /* Green */
+          border: none;
+          color: white;
+          text-align: center;
+          text-decoration: none;
+          font-size: 16px;
+          transition-duration: 0.4s;
+        }
+
+        .customFileUpload:hover {
+          background-color: #45a049;
+        }
+      `}
+      </style>
+      <div class="py-2 -mx-4 px-4 transition-colors md:hover:bg-slate/3">
+        <div class="flex gap-3 rounded-lg" class:op-75={role === 'user'}>
+          <div class={`shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${roleClass[role]}`}></div>
+          <div class="message prose break-words overflow-hidden" innerHTML={htmlString()} />
+        </div>
+        {showRetry?.() && onRetry && (
+          <div class="fie px-3 mb-2">
+            <div onClick={onRetry} class="gpt-retry-btn">
+              <IconRefresh />
+              <span>Regenerate</span>
+            </div>
           </div>
-        </div>
-      )}
-      {role === 'user' && (
-        <div>
-          <label for="fileUpload" class="customFileUpload">
-            Upload Image
-          </label>
-          <input id="fileUpload" type="file" accept="image/*" onInput={handleImageUpload} />
-          {isLoading() && <p>Loading...</p>}
-          {errorMessage() && <p>Error: {errorMessage()}</p>}
-        </div>
-      )}
-    </div>
-  );
-};
-
-// Here is where you add your styles
-<style>
-  .customFileUpload {
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    transition-duration: 0.4s;
-  }
-
-  .customFileUpload:hover {
-    background-color: #45a049;
-  }
-</style>
+        )}
+        {role === 'user' && (
+          <div>
+            <label for="fileUpload" class="customFileUpload">
+              Upload Image
+            </label>
+            <input id="fileUpload" type="file" accept="image/*" onInput={handleImageUpload} />
+            {isLoading() && <p>Loading...</p>}
+            {errorMessage() && <p>Error: {errorMessage()}</p>}
+          </div>
+        )}
+      </div>
+    </>
+  )
+}
