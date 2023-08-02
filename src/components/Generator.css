@@ -7,14 +7,14 @@
     left: 10px;
     top: 10px;
     display: inline-block;
+    padding: 6px 6px;
     cursor: pointer;
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 8px;
-    margin: 4px 2px;
+    font-size: 16px;
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 50%;
