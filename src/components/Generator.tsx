@@ -162,9 +162,7 @@ export default () => {
 
   return (
     <div my-6>
-      <Show when={!firstMessageSent()}>
-        <p>Welcome! Send your first message to start.</p>
-      </Show>
+
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
@@ -172,7 +170,9 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
-      
+            <Show when={!firstMessageSent()}>
+        <p>Welcome! Send your first message to start.</p>
+      </Show>
 
       <Index each={messageList()}>
         {(message, index) => (
