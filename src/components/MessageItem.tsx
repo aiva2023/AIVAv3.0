@@ -22,8 +22,6 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
   }
   const [source] = createSignal('')
   const { copy, copied } = useClipboard({ source, copiedDuring: 1000 })
-  const [isLoading, setIsLoading] = createSignal(false);
-  const [errorMessage, setErrorMessage] = createSignal("");
 
   useEventListener('click', (e) => {
     const el = e.target as HTMLElement
@@ -38,18 +36,6 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
       copy(code)
     }
   })
-
-  const handleImageUpload = (event: Event) => {
-    const file = (event.target as HTMLInputElement).files[0];
-    if (!file) {
-      setErrorMessage("No file selected!");
-      return;
-    }
-    setIsLoading(true);
-    setErrorMessage("");
-    console.log(file);  // For now, we'll just log the selected file.
-    setIsLoading(false);
-  };
 
   const htmlString = () => {
     const md = MarkdownIt({
@@ -82,51 +68,19 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
   }
 
   return (
-    <>
-      <style>
-      {`
-        .customFileUpload {
-          display: inline-block;
-          padding: 6px 12px;
-          cursor: pointer;
-          background-color: #4CAF50; /* Green */
-          border: none;
-          color: white;
-          text-align: center;
-          text-decoration: none;
-          font-size: 16px;
-          transition-duration: 0.4s;
-        }
-
-        .customFileUpload:hover {
-          background-color: #45a049;
-        }
-      `}
-      </style>
-      <div class="py-2 -mx-4 px-4 transition-colors md:hover:bg-slate/3">
-        <div class="flex gap-3 rounded-lg" class:op-75={role === 'user'}>
-          <div class={`shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${roleClass[role]}`}></div>
-          <div class="message prose break-words overflow-hidden" innerHTML={htmlString()} />
-        </div>
-        {showRetry?.() && onRetry && (
-          <div class="fie px-3 mb-2">
-            <div onClick={onRetry} class="gpt-retry-btn">
-              <IconRefresh />
-              <span>Regenerate</span>
-            </div>
-          </div>
-        )}
-        {role === 'user' && (
-          <div>
-            <label for="fileUpload" class="customFileUpload">
-              Upload Image
-            </label>
-            <input id="fileUpload" type="file" accept="image/*" onInput={handleImageUpload} />
-            {isLoading() && <p>Loading...</p>}
-            {errorMessage() && <p>Error: {errorMessage()}</p>}
-          </div>
-        )}
+    <div class="py-2 -mx-4 px-4 transition-colors md:hover:bg-slate/3">
+      <div class="flex gap-3 rounded-lg" class:op-75={role === 'user'}>
+        <div class={`shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${roleClass[role]}`}></div>
+        <div class="message prose break-words overflow-hidden" innerHTML={htmlString()} />
       </div>
-    </>
+      {showRetry?.() && onRetry && (
+        <div class="fie px-3 mb-2">
+          <div onClick={onRetry} class="gpt-retry-btn">
+            <IconRefresh />
+            <span>Regenerate</span>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
