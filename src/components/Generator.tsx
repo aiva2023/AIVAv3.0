@@ -224,10 +224,6 @@ export default () => {
         )}
       >
         <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
-          <input type="file" accept="image/*" ref={fileInputRef!} style="display: none;" onInput={handleImageUpload} />
-          <button onClick={() => fileInputRef.click()} disabled={systemRoleEditing()} class="upload-btn">
-            +
-          </button>
 
 
           <textarea
@@ -243,6 +239,11 @@ export default () => {
             }}
             rows="1"
             class='gen-textarea'
+            <input type="file" accept="image/*" ref={fileInputRef!} style="display: none;" onInput={handleImageUpload} />
+            <button onClick={() => fileInputRef.click()} disabled={systemRoleEditing()} class="upload-btn">
+              +
+            </button>
+  
           />
           <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
             Send
