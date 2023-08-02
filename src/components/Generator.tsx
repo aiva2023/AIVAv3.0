@@ -175,8 +175,8 @@ export default () => {
       <Show when={!firstMessageSent()}>
         <h1>Welcome! Send your first message to start or choose from the suggestions below:</h1>
         <div class="button-container">
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>AI Draw</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>🏖️Vacation Planner</button>
+          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>🖌️AI Draw</button>
           <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Professor</button>
           <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Life Coach</button>
           <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Dietitian</button>
