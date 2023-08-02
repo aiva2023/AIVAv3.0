@@ -11,14 +11,11 @@
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 50%;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
     width: 30px;
     height: 30px;
+    margin-right: 10px;
   }
-  
-  .upload-btn:hover {
-    background-color: #45a049;
-  }
-  
+  .input-area {
+    display: flex;
+    align-items: flex-end;
+  }  
