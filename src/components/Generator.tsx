@@ -191,8 +191,9 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
+      
 
-<Index each={messageList()}>
+      <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
             role={message().role}
