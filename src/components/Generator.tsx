@@ -172,7 +172,7 @@ export default () => {
       />
       <Show when={!firstMessageSent()}>
         <h1>Welcome! Send your first message to start.</h1>
-        <button class="gen-slate-btn">Button 1</button>
+        <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Button 1</button>
         <button class="gen-slate-btn">Button 2</button>
         <button class="gen-slate-btn">Button 3</button>
       </Show>
