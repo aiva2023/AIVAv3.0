@@ -170,8 +170,11 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
-            <Show when={!firstMessageSent()}>
+      <Show when={!firstMessageSent()}>
         <p>Welcome! Send your first message to start.</p>
+        <button class="gen-slate-btn">Button 1</button>
+        <button class="gen-slate-btn">Button 2</button>
+        <button class="gen-slate-btn">Button 3</button>
       </Show>
 
       <Index each={messageList()}>
