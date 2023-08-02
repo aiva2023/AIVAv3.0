@@ -16,30 +16,29 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
+  const [firstMessageSent, setFirstMessageSent] = createSignal(false) // Added state variable for first message
 
+  // ... rest of your existing code ...
 
-  onMount(() => {
-    try {
-      if (localStorage.getItem('messageList')) {
-        setMessageList(JSON.parse(localStorage.getItem('messageList')))
-      }
-      if (localStorage.getItem('systemRoleSettings')) {
-        setCurrentSystemRoleSettings(localStorage.getItem('systemRoleSettings'))
-      }
-    } catch (err) {
-      console.error(err)
+  const handleButtonClick = async () => {
+    const inputValue = inputRef.value
+    if (!inputValue) {
+      return
     }
-    
-    window.addEventListener('beforeunload', handleBeforeUnload)
-    onCleanup(() => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-    })
-  })
-
-  const handleBeforeUnload = () => {
-    localStorage.setItem('messageList', JSON.stringify(messageList()))
-    localStorage.setItem('systemRoleSettings', currentSystemRoleSettings())
+    // @ts-ignore
+    if (window?.umami) umami.trackEvent('chat_generate')
+    inputRef.value = ''
+    setMessageList([
+      ...messageList(),
+      {
+        role: 'user',
+        content: inputValue,
+      },
+    ])
+    requestWithLatestMessage()
+    setFirstMessageSent(true) // Set firstMessageSent to true after user sends message
   }
+
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -182,6 +181,9 @@ export default () => {
 
   return (
     <div my-6>
+      <Show when={!firstMessageSent()}>
+        <p>Welcome! Send your first message to start.</p>
+      </Show>
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
@@ -189,7 +191,8 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
-      <Index each={messageList()}>
+
+<Index each={messageList()}>
         {(message, index) => (
           <MessageItem
             role={message().role}
