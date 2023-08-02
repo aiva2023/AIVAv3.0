@@ -1,6 +1,9 @@
-
 .button-container {
   display: flex;
   overflow-x: auto;
   gap: 10px;
+}
+
+.button-container .gen-slate-btn {
+  border-radius: 20px;
 }
