@@ -1,18 +1,4 @@
-import { Accessor, createSignal } from 'solid-js'
-import type { ChatMessage } from '@/types'
-import MarkdownIt from 'markdown-it'
-// @ts-ignore
-import mdKatex from 'markdown-it-katex'
-import mdHighlight from 'markdown-it-highlightjs'
-import IconRefresh from './icons/Refresh'
-import { useClipboard, useEventListener } from 'solidjs-use'
 
-interface Props {
-  role: ChatMessage['role']
-  message: Accessor<string> | string
-  showRetry?: Accessor<boolean>
-  onRetry?: () => void
-}
 
 export default ({ role, message, showRetry, onRetry }: Props) => {
   const roleClass = {
