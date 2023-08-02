@@ -97,11 +97,35 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
       )}
       {role === 'user' && (
         <div>
-          <input type="file" accept="image/*" onInput={handleImageUpload} />
+          <label for="fileUpload" class="customFileUpload">
+            Upload Image
+          </label>
+          <input id="fileUpload" type="file" accept="image/*" onInput={handleImageUpload} style="display:none;" />
           {isLoading() && <p>Loading...</p>}
           {errorMessage() && <p>Error: {errorMessage()}</p>}
         </div>
       )}
     </div>
-  )
-}
+  );
+};
+
+// Here is where you add your styles
+<style>
+  .customFileUpload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+  }
+
+  .customFileUpload:hover {
+    background-color: #45a049;
+  }
+</style>
