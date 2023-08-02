@@ -7,14 +7,14 @@
     left: 10px;
     top: 10px;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 6px;
     cursor: pointer;
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 8px;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
@@ -23,6 +23,4 @@
 .upload-btn:hover {
     background-color: #45a049;
 }
-.gen-textarea {
-    padding-left: 50px; /* Adjust this value to control the padding inside the textarea */
-}
+
