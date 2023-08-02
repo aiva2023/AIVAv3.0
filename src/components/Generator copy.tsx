@@ -9,7 +9,6 @@ import { useThrottleFn } from 'solidjs-use'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
-  let fileInputRef: HTMLInputElement
   const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
   const [systemRoleEditing, setSystemRoleEditing] = createSignal(false)
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
@@ -18,14 +17,6 @@ export default () => {
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
 
-  const handleImageUpload = async (event) => {
-    const file = event.target.files[0]
-    if (!file) {
-      return
-    }
-    const text = await convertImageToText(file)
-    inputRef.value = text
-  }
 
   onMount(() => {
     try {
@@ -55,6 +46,7 @@ export default () => {
     if (!inputValue) {
       return
     }
+    // @ts-ignore
     if (window?.umami) umami.trackEvent('chat_generate')
     inputRef.value = ''
     setMessageList([
@@ -171,6 +163,7 @@ export default () => {
   const retryLastFetch = () => {
     if (messageList().length > 0) {
       const lastMessage = messageList()[messageList().length - 1]
+      console.log(lastMessage)
       if (lastMessage.role === 'assistant') {
         setMessageList(messageList().slice(0, -1))
       }
@@ -223,10 +216,6 @@ export default () => {
         )}
       >
         <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
-          <input type="file" accept="image/*" ref={fileInputRef!} style="display: none;" onInput={handleImageUpload} />
-          <button onClick={() => fileInputRef.click()} disabled={systemRoleEditing()} class="upload-btn">
-            Upload Image
-          </button>
           <textarea
             ref={inputRef!}
             disabled={systemRoleEditing()}
@@ -249,26 +238,6 @@ export default () => {
           </button>
         </div>
       </Show>
-      <style>
-        .upload-btn {
-          display: inline-block;
-          padding: 6px 12px;
-          cursor: pointer;
-          background-color: #4CAF50; /* Green */
-          border: none;
-          color: white;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          transition-duration: 0.4s;
-          cursor: pointer;
-        }
-        .upload-btn:hover {
-          background-color: #45a049;
-        }
-      </style>
     </div>
   )
 }
