@@ -1,34 +1,28 @@
+
+.input-area {
+    position: relative;
+}
 .upload-btn {
+    position: absolute;
+    left: 10px;
+    top: 10px;
     display: inline-block;
-    padding: 10px;
+    padding: 6px 12px;
     cursor: pointer;
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 16px;
+    margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-  }
-  .input-area {
-    display: flex;
-    align-items: flex-end;
-  }  
-
-  .gen-text-wrapper {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
-    grid-gap: 0.5rem;
-    gap: 0.5rem;
-    transition-property: opacity;
-    transition-timing-function: cubic-bezier(.4,0,.2,1);
-    transition-duration: .15s;
-    flex-direction: column;
+}
+.upload-btn:hover {
+    background-color: #45a049;
+}
+.gen-textarea {
+    padding-left: 50px; /* Adjust this value to control the padding inside the textarea */
 }
