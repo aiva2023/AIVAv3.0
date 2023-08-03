@@ -8,3 +8,9 @@
   border-radius: 20px;
   white-space: nowrap; /* this prevents the text from wrapping to a new line */
 }
+
+.gen-slate-btn {
+  /* existing styles here... */
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
