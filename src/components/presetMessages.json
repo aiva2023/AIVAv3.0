@@ -1,17 +1,42 @@
 [
     {
-      "category": "Category1",
+      "category": "Education",
       "messages": {
         "Bot": "Act as a bot",
-        "Tutor": "Act as a tutor"
+        "Tutor": "Act as a tutor",
+        "Bot2": "Act as a bot",
+        "Tutor2": "Act as a tutor",
+        "Bot3": "Act as a bot",
+        "Tutor3": "Act as a tutor"
       }
     },
     {
-      "category": "Category2",
+      "category": "Health & Nutrition",
       "messages": {
         "Guide": "Act as a guide",
         "Mentor": "Act as a mentor"
       }
-    }
+    },
+    {
+        "category": "Travel",
+        "messages": {
+          "Guide1": "Act as a guide",
+          "Mentor2": "Act as a mentor"
+        }
+      },
+      {
+        "category": "Career",
+        "messages": {
+          "Guide3": "Act as a guide",
+          "Mentor3": "Act as a mentor"
+        }
+      },
+      {
+        "category": "Daily Life Style",
+        "messages": {
+          "Guide4": "Act as a guide",
+          "Mentor4": "Act as a mentor"
+        }
+      }
   ]
   
