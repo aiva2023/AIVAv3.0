@@ -12,6 +12,27 @@
         "Guide": "Act as a guide",
         "Mentor": "Act as a mentor"
       }
-    }
+    },
+    {
+        "category": "Category3",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
+      {
+        "category": "Category4",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
+      {
+        "category": "Category5",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
   ]
   
