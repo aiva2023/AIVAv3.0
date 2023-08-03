@@ -172,7 +172,6 @@ export default () => {
       { !(messageList().length || currentSystemRoleSettings()) && (
         <div>
           <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
-          <br/>
           <div class="button-container">
             {presetMessages.map(({category, messages}) => (
               <div>
