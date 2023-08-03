@@ -19,8 +19,7 @@ export default () => {
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
   const [firstMessageSent, setFirstMessageSent] = createSignal(false)
-  const [selectedCategory, setSelectedCategory] = createSignal(null) // state variable to store selected category
-  const [selectedMessages, setSelectedMessages] = createSignal(null) // state variable to store selected messages
+  const [selectedCategory, setSelectedCategory] = createSignal(null)
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -178,11 +177,9 @@ export default () => {
             {presetMessages.map(({category, messages}) => (
               <div>
                 <button 
-                  onClick={() => { 
-                    setSelectedCategory(category)
-                    setSelectedMessages(messages)
-                  }} 
-                  class="gen-slate-btn"
+                  onClick={() => { setSelectedCategory(category) }} 
+                  className="gen-category-btn"
+                  key={`category-${category}`}
                 >
                   {category}
                 </button>
@@ -190,15 +187,19 @@ export default () => {
             ))}
           </div>
           <br/>
-          {selectedMessages() && Object.entries(selectedMessages()).map(([key, value]) => (
-            <button 
-              onClick={() => { inputRef.value = value }} 
-              class="gen-slate-btn"
-              key={`presetMessage-${key}`}
-            >
-              {key}
-            </button>
-          ))}
+          {selectedCategory() && 
+            <div>
+              {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
+                <button 
+                  onClick={() => { inputRef.value = value }} 
+                  className="gen-slate-btn"
+                  key={`presetMessage-${key}`}
+                >
+                  {key}
+                </button>
+              ))}
+            </div>
+          }
         </div>
       )}
       <Index each={messageList()}>
@@ -240,12 +241,12 @@ export default () => {
               inputRef.style.height = inputRef.scrollHeight + 'px'
             }}
             rows="1"
-            class='gen-textarea'
+            className='gen-textarea'
           />
-          <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
+          <button onClick={handleButtonClick} disabled={systemRoleEditing()} className="gen-slate-btn">
             Send
           </button>
-          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
+          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} className="gen-slate-btn">
             <IconClear />
           </button>
         </div>
