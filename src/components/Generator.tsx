@@ -6,7 +6,8 @@ import SystemRoleSettings from './SystemRoleSettings'
 import ErrorMessageItem from './ErrorMessageItem'
 import { generateSignature } from '@/utils/auth'
 import { useThrottleFn } from 'solidjs-use'
-import './Generator.css';
+import './Generator.css'
+import presetMessages from './presetMessages.json'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -17,28 +18,13 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
-  const [firstMessageSent, setFirstMessageSent] = createSignal(false) // Added state variable for first message
-  
-  const presetMessages = {
-    "Bot": "Act as a bot",
-    "Tutor": "Act as a tutor",
-    "Guide": "Act as a guide",
-    "Mentor": "Act as a mentor",
-    "Coach": "Act as a coach",
-    "Friend": "Act as a friend",
-    "Advisor": "Act as an advisor",
-    "Consultant": "Act as a consultant",
-    "Manager": "Act as a manager",
-    "Collaborator": "Act as a collaborator",
-    "Leader": "Act as a leader"
-  };
+  const [firstMessageSent, setFirstMessageSent] = createSignal(false)
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
     if (!inputValue) {
       return
     }
-    // @ts-ignore
     if (window?.umami) umami.trackEvent('chat_generate')
     inputRef.value = ''
     setMessageList([
@@ -49,7 +35,7 @@ export default () => {
       },
     ])
     requestWithLatestMessage()
-    setFirstMessageSent(true) // Set firstMessageSent to true after user sends message
+    setFirstMessageSent(true)
   }
 
   const smoothToBottom = useThrottleFn(() => {
@@ -140,7 +126,7 @@ export default () => {
 
   const clear = () => {
     inputRef.value = ''
-    inputRef.style.height = 'auto';
+    inputRef.style.height = 'auto'
     setMessageList([])
     setCurrentAssistantMessage('')
     setCurrentSystemRoleSettings('')
@@ -236,8 +222,8 @@ export default () => {
             autocomplete="off"
             autofocus
             onInput={() => {
-              inputRef.style.height = 'auto';
-              inputRef.style.height = inputRef.scrollHeight + 'px';
+              inputRef.style.height = 'auto'
+              inputRef.style.height = inputRef.scrollHeight + 'px'
             }}
             rows="1"
             class='gen-textarea'
