@@ -30,10 +30,15 @@
 }
 
 .gen-category-btn {
-  margin: 0 10px 10px 0;
-  border-radius: 5px;
+  /* The styles from .gen-slate-btn */
+  border: none;
+  background: #0084ff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+  
+  /* The additional styles you want for .gen-category-btn */
   background-color: gray;
-  color: white; /* this will make the text color white so it's visible on the gray background */
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
