@@ -19,8 +19,12 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
   const [firstMessageSent, setFirstMessageSent] = createSignal(false) // Added state variable for first message
   
-
-  // ... rest of your existing code ...
+  const presetMessages = [
+    'Act as a bot', 'Act as a tutor', 'Act as a guide',
+    'Act as a mentor', 'Act as a coach', 'Act as a friend',
+    'Act as an advisor', 'Act as a consultant', 'Act as a manager',
+    'Act as a collaborator', 'Act as a leader'
+  ];
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -164,7 +168,6 @@ export default () => {
 
   return (
     <div my-6>
-
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
@@ -172,23 +175,22 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
-      <Show when={!firstMessageSent()}>
-        <h1>Welcome! Send your first message to start or choose from the suggestions below:</h1>
-        <div class="button-container">
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>🏖️Vacation Planner</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>🖌️AI Draw</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Professor</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Life Coach</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Dietitian</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>ESL Tutor</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Sell Me This Pen</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Self-hel Book</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Grammar Correction</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Plagiarism Checker</button>
-          <button class="gen-slate-btn" onClick={() => { inputRef.value = 'Act as a bot'; }}>Financial Planning</button>
+      { !(messageList().length || currentSystemRoleSettings()) && (
+        <div>
+          <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
+          <div class="button-container">
+            {presetMessages.map((msg, index) => (
+              <button 
+                onClick={() => { inputRef.value = msg }} 
+                class="gen-slate-btn"
+                key={`presetMessage-${index}`}
+              >
+                {msg}
+              </button>
+            ))}
+          </div>
         </div>
-      </Show>
-
+      )}
       <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
