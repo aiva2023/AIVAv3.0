@@ -186,7 +186,6 @@ export default () => {
               </div>
             ))}
           </div>
-          <br/>
           {selectedCategory() && 
             <div>
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
