@@ -29,3 +29,9 @@
   border-radius: 20px;
 }
 
+.gen-category-btn {
+  margin: 0 10px 10px 0;
+  border-radius: 20px;
+  background-color: gray;
+  color: white; /* this will make the text color white so it's visible on the gray background */
+}
