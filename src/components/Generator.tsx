@@ -192,9 +192,9 @@ export default () => {
                 </button>
               ))}
             </div>
-          }
+          }<p>You can also browse from 100+ templates by typing "/" or set your own AIVA persona here⏬</p>
         </div>
-      <p>You can also browse from 100+ templates by typing "/" or set your own AIVA persona here⏬</p>
+
       )}
 
       <SystemRoleSettings
