@@ -173,15 +173,19 @@ export default () => {
           <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
           <br/>
           <div class="button-container">
-            {Object.entries(presetMessages).map(([key, value]) => (
-              <button 
-                onClick={() => { inputRef.value = value }} 
-                class="gen-slate-btn"
-                key={`presetMessage-${key}`}
-              >
-                {key}
-              </button>
-             
+            {presetMessages.map(({category, messages}) => (
+              <div>
+                <h3>{category}</h3>
+                {Object.entries(messages).map(([key, value]) => (
+                  <button 
+                    onClick={() => { inputRef.value = value }} 
+                    class="gen-slate-btn"
+                    key={`presetMessage-${key}`}
+                  >
+                    {key}
+                  </button>
+                ))}
+              </div>
             ))}
           </div>
           <br/>
