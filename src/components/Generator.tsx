@@ -20,6 +20,7 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
   const [firstMessageSent, setFirstMessageSent] = createSignal(false)
   const [selectedCategory, setSelectedCategory] = createSignal(null)
+  const [showMessagesButtons, setShowMessagesButtons] = createSignal(true)
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -131,6 +132,7 @@ export default () => {
     setMessageList([])
     setCurrentAssistantMessage('')
     setCurrentSystemRoleSettings('')
+    setShowMessagesButtons(false)
   }
 
   const stopStreamFetch = () => {
@@ -176,7 +178,7 @@ export default () => {
             {presetMessages.map(({category, messages}) => (
               <div>
                 <button 
-                  onClick={() => { setSelectedCategory(category) }} 
+                  onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); }} 
                   className="gen-category-btn"
                   key={`category-${category}`}
                 >
@@ -185,7 +187,7 @@ export default () => {
               </div>
             ))}
           </div>
-          {selectedCategory() && 
+          {showMessagesButtons() && selectedCategory() && 
             <div>
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
                 <button 
