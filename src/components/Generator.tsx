@@ -185,7 +185,7 @@ export default () => {
       { !(messageList().length || currentSystemRoleSettings()) && (
         <div>
           <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
-          <p> </p>
+          <br/>
           <div class="button-container">
             {Object.entries(presetMessages).map(([key, value]) => (
               <button 
@@ -198,7 +198,7 @@ export default () => {
              
             ))}
           </div>
-          <p> </p>
+          <br/>
         </div>
       )}
       <Index each={messageList()}>
