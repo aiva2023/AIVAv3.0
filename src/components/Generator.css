@@ -8,6 +8,7 @@
   /* existing styles here... */
   padding-top: 5px;
   padding-bottom: 5px;
+  border-radius: 20px; /* This makes the buttons round */
 }
 
 .greeting-message {
@@ -23,3 +24,4 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
 }
+
