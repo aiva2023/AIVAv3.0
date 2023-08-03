@@ -1,5 +1,4 @@
-import type { ChatMessage, ErrorMessage } from '@/types'
-import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
+import { createSignal, Index, Show, onMount, onCleanup, on } from 'solid-js' // Added 'on'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
@@ -70,7 +69,6 @@ export default () => {
           role: 'system',
           content: currentSystemRoleSettings(),
         })
-        setShowGreeting(false) // Set showGreeting to false after user sets SystemRoleSettings
       }
       const timestamp = Date.now()
       const response = await fetch('/api/generate', {
@@ -145,6 +143,7 @@ export default () => {
     setMessageList([])
     setCurrentAssistantMessage('')
     setCurrentSystemRoleSettings('')
+    setShowGreeting(true) // Reset showGreeting to true when clearing
   }
 
   const stopStreamFetch = () => {
@@ -173,6 +172,11 @@ export default () => {
       handleButtonClick()
     }
   }
+
+  // Watcher for currentSystemRoleSettings
+  on(currentSystemRoleSettings, () => {
+    setShowGreeting(false)
+  })
 
   return (
     <div my-6>
