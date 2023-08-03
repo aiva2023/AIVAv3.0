@@ -192,7 +192,7 @@ export default () => {
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
                 <button 
                   onClick={() => { inputRef.value = value }} 
-                  className="gen-slate-btn"
+                  className="gen-message-btn"
                   key={`presetMessage-${key}`}
                 >
                   {key}
