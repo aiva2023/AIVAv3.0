@@ -1,8 +1,3 @@
-.button-container {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-}
 
 .button-container .gen-slate-btn {
   border-radius: 20px;
@@ -17,4 +12,14 @@
 
 .greeting-message {
   margin-bottom: 16px; /* Adjust this value to your preference */
+}
+
+
+.button-container {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 10px;  /* adjust as needed */
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
 }
