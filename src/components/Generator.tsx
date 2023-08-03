@@ -194,8 +194,9 @@ export default () => {
             </div>
           }
         </div>
+      <p>You can also browse from 100+ templates by typing "/" or set your own AIVA persona here⏬</p>
       )}
-        <p>You can also browse from 100+ templates by typing "/" or set your own AIVA persona here⏬</p>
+
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
