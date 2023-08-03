@@ -1,4 +1,5 @@
-import { createSignal, Index, Show, onMount, onCleanup, on } from 'solid-js' // Added 'on'
+import type { ChatMessage, ErrorMessage } from '@/types'
+import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
@@ -16,21 +17,14 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
-  const [showGreeting, setShowGreeting] = createSignal(true) // Added state variable for greeting
-
-  const presetMessages = {
-    "Bot": "Act as a bot",
-    "Tutor": "Act as a tutor",
-    "Guide": "Act as a guide",
-    "Mentor": "Act as a mentor",
-    "Coach": "Act as a coach",
-    "Friend": "Act as a friend",
-    "Advisor": "Act as an advisor",
-    "Consultant": "Act as a consultant",
-    "Manager": "Act as a manager",
-    "Collaborator": "Act as a collaborator",
-    "Leader": "Act as a leader"
-  };
+  const [firstMessageSent, setFirstMessageSent] = createSignal(false) // Added state variable for first message
+  
+  const presetMessages = [
+    'Act as a bot', 'Act as a tutor', 'Act as a guide',
+    'Act as a mentor', 'Act as a coach', 'Act as a friend',
+    'Act as an advisor', 'Act as a consultant', 'Act as a manager',
+    'Act as a collaborator', 'Act as a leader'
+  ];
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -48,7 +42,7 @@ export default () => {
       },
     ])
     requestWithLatestMessage()
-    setShowGreeting(false) // Set showGreeting to false after user sends message
+    setFirstMessageSent(true) // Set firstMessageSent to true after user sends message
   }
 
   const smoothToBottom = useThrottleFn(() => {
@@ -143,7 +137,6 @@ export default () => {
     setMessageList([])
     setCurrentAssistantMessage('')
     setCurrentSystemRoleSettings('')
-    setShowGreeting(true) // Reset showGreeting to true when clearing
   }
 
   const stopStreamFetch = () => {
@@ -173,14 +166,8 @@ export default () => {
     }
   }
 
-  // Watcher for currentSystemRoleSettings
-  on(currentSystemRoleSettings, () => {
-    setShowGreeting(false)
-  })
-
   return (
     <div my-6>
-
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
@@ -188,15 +175,22 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
-      <Show when={showGreeting()}>
-        <h1>Welcome! Send your first message to start or choose from the suggestions below:</h1>
-        <div class="button-container">
-          {Object.entries(presetMessages).map(([key, value]) => (
-            <button class="gen-slate-btn" onClick={() => { inputRef.value = value; }}>{key}</button>
-          ))}
+      { !(messageList().length || currentSystemRoleSettings()) && (
+        <div>
+          <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
+          <div class="button-container">
+            {presetMessages.map((msg, index) => (
+              <button 
+                onClick={() => { inputRef.value = msg }} 
+                class="gen-slate-btn"
+                key={`presetMessage-${index}`}
+              >
+                {msg}
+              </button>
+            ))}
+          </div>
         </div>
-      </Show>
-
+      )}
       <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
