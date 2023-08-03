@@ -164,13 +164,6 @@ export default () => {
 
   return (
     <div my-6>
-      <SystemRoleSettings
-        canEdit={() => messageList().length === 0}
-        systemRoleEditing={systemRoleEditing}
-        setSystemRoleEditing={setSystemRoleEditing}
-        currentSystemRoleSettings={currentSystemRoleSettings}
-        setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-      />
       { !(messageList().length || currentSystemRoleSettings()) && (
         <div>
           <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
@@ -202,6 +195,14 @@ export default () => {
           }
         </div>
       )}
+      <SystemRoleSettings
+        canEdit={() => messageList().length === 0}
+        systemRoleEditing={systemRoleEditing}
+        setSystemRoleEditing={setSystemRoleEditing}
+        currentSystemRoleSettings={currentSystemRoleSettings}
+        setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
+      />
+      
       <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
