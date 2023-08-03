@@ -19,12 +19,19 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
   const [firstMessageSent, setFirstMessageSent] = createSignal(false) // Added state variable for first message
   
-  const presetMessages = [
-    'Act as a bot', 'Act as a tutor', 'Act as a guide',
-    'Act as a mentor', 'Act as a coach', 'Act as a friend',
-    'Act as an advisor', 'Act as a consultant', 'Act as a manager',
-    'Act as a collaborator', 'Act as a leader'
-  ];
+  const presetMessages = {
+    "Bot": "Act as a bot",
+    "Tutor": "Act as a tutor",
+    "Guide": "Act as a guide",
+    "Mentor": "Act as a mentor",
+    "Coach": "Act as a coach",
+    "Friend": "Act as a friend",
+    "Advisor": "Act as an advisor",
+    "Consultant": "Act as a consultant",
+    "Manager": "Act as a manager",
+    "Collaborator": "Act as a collaborator",
+    "Leader": "Act as a leader"
+  };
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -168,6 +175,7 @@ export default () => {
 
   return (
     <div my-6>
+
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
@@ -175,22 +183,15 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
-      { !(messageList().length || currentSystemRoleSettings()) && (
-        <div>
-          <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
-          <div class="button-container">
-            {presetMessages.map((msg, index) => (
-              <button 
-                onClick={() => { inputRef.value = msg }} 
-                class="gen-slate-btn"
-                key={`presetMessage-${index}`}
-              >
-                {msg}
-              </button>
-            ))}
-          </div>
+      <Show when={!firstMessageSent() || currentSystemRoleSettings()}>
+        <h1>Welcome! Send your first message to start or choose from the suggestions below:</h1>
+        <div class="button-container">
+          {Object.entries(presetMessages).map(([key, value]) => (
+            <button class="gen-slate-btn" onClick={() => { inputRef.value = value; }}>{key}</button>
+          ))}
         </div>
-      )}
+      </Show>
+
       <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
