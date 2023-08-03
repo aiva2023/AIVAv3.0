@@ -17,8 +17,8 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
-  const [firstMessageSent, setFirstMessageSent] = createSignal(false) // Added state variable for first message
-  
+  const [showGreeting, setShowGreeting] = createSignal(true) // Added state variable for greeting
+
   const presetMessages = {
     "Bot": "Act as a bot",
     "Tutor": "Act as a tutor",
@@ -49,7 +49,7 @@ export default () => {
       },
     ])
     requestWithLatestMessage()
-    setFirstMessageSent(true) // Set firstMessageSent to true after user sends message
+    setShowGreeting(false) // Set showGreeting to false after user sends message
   }
 
   const smoothToBottom = useThrottleFn(() => {
@@ -70,6 +70,7 @@ export default () => {
           role: 'system',
           content: currentSystemRoleSettings(),
         })
+        setShowGreeting(false) // Set showGreeting to false after user sets SystemRoleSettings
       }
       const timestamp = Date.now()
       const response = await fetch('/api/generate', {
@@ -183,7 +184,7 @@ export default () => {
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
-      <Show when={!firstMessageSent() || currentSystemRoleSettings()}>
+      <Show when={showGreeting()}>
         <h1>Welcome! Send your first message to start or choose from the suggestions below:</h1>
         <div class="button-container">
           {Object.entries(presetMessages).map(([key, value]) => (
