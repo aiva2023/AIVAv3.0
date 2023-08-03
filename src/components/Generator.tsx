@@ -19,12 +19,19 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
   const [firstMessageSent, setFirstMessageSent] = createSignal(false) // Added state variable for first message
   
-  const presetMessages = [
-    'Act as a bot', 'Act as a tutor', 'Act as a guide',
-    'Act as a mentor', 'Act as a coach', 'Act as a friend',
-    'Act as an advisor', 'Act as a consultant', 'Act as a manager',
-    'Act as a collaborator', 'Act as a leader'
-  ];
+  const presetMessages = {
+    "Bot": "Act as a bot",
+    "Tutor": "Act as a tutor",
+    "Guide": "Act as a guide",
+    "Mentor": "Act as a mentor",
+    "Coach": "Act as a coach",
+    "Friend": "Act as a friend",
+    "Advisor": "Act as an advisor",
+    "Consultant": "Act as a consultant",
+    "Manager": "Act as a manager",
+    "Collaborator": "Act as a collaborator",
+    "Leader": "Act as a leader"
+  };
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -179,13 +186,13 @@ export default () => {
         <div>
           <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
           <div class="button-container">
-            {presetMessages.map((msg, index) => (
+            {Object.entries(presetMessages).map(([key, value]) => (
               <button 
-                onClick={() => { inputRef.value = msg }} 
+                onClick={() => { inputRef.value = value }} 
                 class="gen-slate-btn"
-                key={`presetMessage-${index}`}
+                key={`presetMessage-${key}`}
               >
-                {msg}
+                {key}
               </button>
             ))}
           </div>
