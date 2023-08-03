@@ -1,14 +1,6 @@
 
-.button-container .gen-slate-btn {
-  border-radius: 20px;
-  white-space: nowrap; /* this prevents the text from wrapping to a new line */
-}
 
-.gen-slate-btn {
-  /* existing styles here... */
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
+
 
 .greeting-message {
   margin-bottom: 16px; /* Adjust this value to your preference */
@@ -24,10 +16,6 @@
   scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
 }
 
-.gen-category-btn, .gen-slate-btn {
-  margin: 0 10px 10px 0;
-  border-radius: 20px;
-}
 
 .gen-category-btn {
   /* The styles from .gen-slate-btn */
