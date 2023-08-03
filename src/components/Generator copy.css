@@ -1,0 +1,25 @@
+
+.button-container .gen-slate-btn {
+  border-radius: 20px;
+  white-space: nowrap; /* this prevents the text from wrapping to a new line */
+}
+
+.gen-slate-btn {
+  /* existing styles here... */
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.greeting-message {
+  margin-bottom: 16px; /* Adjust this value to your preference */
+}
+
+
+.button-container {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 10px;  /* adjust as needed */
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
+}

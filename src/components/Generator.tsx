@@ -20,6 +20,7 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
   const [firstMessageSent, setFirstMessageSent] = createSignal(false)
   const [selectedCategory, setSelectedCategory] = createSignal(null) // state variable to store selected category
+  const [selectedMessages, setSelectedMessages] = createSignal(null) // state variable to store selected messages
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -177,24 +178,27 @@ export default () => {
             {presetMessages.map(({category, messages}) => (
               <div>
                 <button 
-                  onClick={() => { setSelectedCategory(category) }} 
+                  onClick={() => { 
+                    setSelectedCategory(category)
+                    setSelectedMessages(messages)
+                  }} 
                   class="gen-slate-btn"
                 >
                   {category}
                 </button>
-                {selectedCategory() === category && Object.entries(messages).map(([key, value]) => (
-                  <button 
-                    onClick={() => { inputRef.value = value }} 
-                    class="gen-slate-btn"
-                    key={`presetMessage-${key}`}
-                  >
-                    {key}
-                  </button>
-                ))}
               </div>
             ))}
           </div>
           <br/>
+          {selectedMessages() && Object.entries(selectedMessages()).map(([key, value]) => (
+            <button 
+              onClick={() => { inputRef.value = value }} 
+              class="gen-slate-btn"
+              key={`presetMessage-${key}`}
+            >
+              {key}
+            </button>
+          ))}
         </div>
       )}
       <Index each={messageList()}>
