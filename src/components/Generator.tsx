@@ -185,7 +185,10 @@ export default () => {
             <div className="message-buttons-container">
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
                 <button 
-                  onClick={() => { inputRef.value = value }} 
+                  onClick={() => { 
+                    inputRef.value = value; 
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); 
+                  }} 
                   className="gen-message-btn"
                   key={`presetMessage-${key}`}
                 >
