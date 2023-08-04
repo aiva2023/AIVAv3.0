@@ -174,18 +174,19 @@ export default () => {
           <p>Welcome! Send your first message right away to start chatting or why not choose from the suggestions below to set AIVA's behavior:</p>
           <div class="button-container">
             {presetMessages.map(({category, messages}) => (
-              <div>
-                <button 
-                  onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
-                  className="gen-category-btn"
-                  key={`category-${category}`}
-                  disabled={systemRoleEditing() && personaInput() !== ''}
-                >
-                  {category}
-                </button>
+              <div class="button-container">
+                {presetMessages.map(({category, messages}) => (
+                  <div>
+                    <button 
+                      onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
+                      className="gen-category-btn"
+                      key={`category-${category}`}
+                    >
+                      {category}
+                    </button>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
           {showMessagesButtons() && !addingPersona() && selectedCategory() && 
             <div className="message-buttons-container">
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
