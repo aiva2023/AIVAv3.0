@@ -201,8 +201,7 @@ export default () => {
               ))}
             </div>
           }
-          </br>
-          <p>You can also browse from 150+ templates by typing "/" or set your own AIVA Persona here ⏬</p>
+          <p>You can also browse from 150+ templates by typing "/" or set your own AIVA Persona here ⏬</p> </br>
         </div>
       )}
 
