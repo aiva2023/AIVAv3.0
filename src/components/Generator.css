@@ -2,7 +2,6 @@
   margin-bottom: 16px; /* Adjust this value to your preference */
 }
 
-
 .button-container {
   display: flex;
   overflow-x: auto;
@@ -12,7 +11,6 @@
   scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
   white-space: nowrap; /* this prevents the text from wrapping to a new line */
 }
-
 
 .gen-category-btn {
   /* The styles from .gen-slate-btn */
@@ -28,6 +26,15 @@
   background-color: gray;
 }
 
+.message-buttons-container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: calc(3 * (60px + 2*5px)); /* adjust the height according to your message button's height */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
+}
+
 .gen-message-btn {
   display: block;
   width: 100%;
@@ -40,14 +47,4 @@
   text-align: center;
   text-decoration: none;
   font-size: 16px;
-  overflow: auto; /* Makes the content scrollable if it overflows the element's box */
-}
-.button-container {
-  display: flex;
-  flex-direction: column; /* stack the buttons vertically */
-  overflow-y: auto; /* make it scrollable vertically */
-  height: calc(3 * (40px + 2*5px)); /* height of 3 buttons, adjust as needed */
-  gap: 10px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
 }
