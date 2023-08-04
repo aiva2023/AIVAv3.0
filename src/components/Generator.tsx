@@ -207,7 +207,7 @@ export default () => {
       )}
 
       <SystemRoleSettings
-        canEdit={() => messageList().length === 0}
+        canEdit={() => true}
         systemRoleEditing={systemRoleEditing}
         setSystemRoleEditing={(editing) => {
           setAddingPersona(editing);
