@@ -1,7 +1,7 @@
 import { createSignal, Show } from 'solid-js';
 import type { Accessor, Setter } from 'solid-js';
+import IconEnv from './icons/Env';
 import suggestions from './UserRoles.json';
-import IconClear from './icons/Clear'
 
 interface Props {
   canEdit: Accessor<boolean>;
@@ -135,7 +135,7 @@ export default (props: Props) => {
             Set
           </button>
           <button onClick={handleCancelClick} class="gen-slate-btn">
-             Cancel
+            Cancel
           </button>
         </div>
       </Show>
