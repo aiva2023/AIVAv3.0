@@ -178,7 +178,6 @@ export default () => {
                   onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
                   className="gen-category-btn"
                   key={`category-${category}`}
-                  disabled={systemRoleEditing()}
                 >
                   {category}
                 </button>
