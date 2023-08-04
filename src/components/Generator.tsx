@@ -22,7 +22,6 @@ export default () => {
   const [selectedCategory, setSelectedCategory] = createSignal(null)
   const [showMessagesButtons, setShowMessagesButtons] = createSignal(true)
   const [addingPersona, setAddingPersona] = createSignal(false)
-  const [personaInput, setPersonaInput] = createSignal('') // Added this line
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -136,7 +135,6 @@ export default () => {
     setCurrentSystemRoleSettings('')
     setShowMessagesButtons(false)
     setAddingPersona(false)
-    setPersonaInput('') // Add this line
   }
 
   const stopStreamFetch = () => {
@@ -166,6 +164,7 @@ export default () => {
     }
   }
 
+ 
   return (
     <div my-6>
       { !(messageList().length || currentSystemRoleSettings()) && (
@@ -178,20 +177,19 @@ export default () => {
                   onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
                   className="gen-category-btn"
                   key={`category-${category}`}
-                  disabled={systemRoleEditing()}
                 >
                   {category}
                 </button>
               </div>
             ))}
           </div>
-          {showMessagesButtons() && !addingPersona() && selectedCategory() && 
+          {showMessagesButtons() && selectedCategory() && 
             <div className="message-buttons-container">
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
                 <button 
                   onClick={() => { 
-                    setPersonaInput(value); // Change here
-                    setSystemRoleEditing(true); // Open systemRoleEditing
+                    setSystemRoleEditing(true);
+                    setCurrentSystemRoleSettings(value); 
                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); 
                   }} 
                   className="gen-message-btn"
@@ -207,7 +205,7 @@ export default () => {
       )}
 
       <SystemRoleSettings
-        canEdit={() => messageList().length === 0}
+        canEdit={() => true}
         systemRoleEditing={systemRoleEditing}
         setSystemRoleEditing={(editing) => {
           setAddingPersona(editing);
@@ -215,8 +213,6 @@ export default () => {
         }}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-        personaInput={personaInput} // Add this line
-        setPersonaInput={setPersonaInput} // Add this line
       />
 
       <Index each={messageList()}>
