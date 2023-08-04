@@ -34,8 +34,13 @@ export default (props: Props) => {
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value);
     props.setSystemRoleEditing(false);
-    props.setShowMessagesButtons(false); // Add this line
   };
+  
+  const handleSysEditBtnClick = () => {
+    props.setSystemRoleEditing(!props.systemRoleEditing());
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Add this line
+  };
+  
 
   return (
     <div class="my-4">
