@@ -92,7 +92,13 @@ export default (props: Props) => {
           </div>
         </Show>
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
-          <span onClick={() => props.setSystemRoleEditing(!props.systemRoleEditing())} class="sys-edit-btn">
+          <span 
+            onClick={() => {
+              props.setSystemRoleEditing(!props.systemRoleEditing()); 
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }} 
+            class="sys-edit-btn"
+          >
             <IconEnv />
             <span>Add AIVA Persona</span>
           </span>
