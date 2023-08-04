@@ -165,12 +165,11 @@ export default () => {
       handleButtonClick()
     }
   }
-
   return (
     <div my-6>
       { !(messageList().length || currentSystemRoleSettings()) && (
         <div>
-          <p>Ready to chat? Send your first message or pick a behavior for AIVA from the suggestions below to get started!🚀</p>
+          <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
           <div class="button-container">
             {presetMessages.map(({category, messages}) => (
               <div>
@@ -178,6 +177,7 @@ export default () => {
                   onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
                   className="gen-category-btn"
                   key={`category-${category}`}
+                  disabled={systemRoleEditing() && personaInput() !== ''}
                 >
                   {category}
                 </button>
@@ -201,7 +201,7 @@ export default () => {
               ))}
             </div>
           }
-          <p>Browse 150+ templates by typing "/", or set your own AIVA Persona here! ⏬</p>
+          <p class="extra-space">Browse 150+ templates by typing "/", or set your own AIVA Persona here! ⏬</p>
         </div>
       )}
 
