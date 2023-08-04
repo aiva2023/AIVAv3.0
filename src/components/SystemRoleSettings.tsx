@@ -9,8 +9,9 @@ interface Props {
   setSystemRoleEditing: Setter<boolean>;
   currentSystemRoleSettings: Accessor<string>;
   setCurrentSystemRoleSettings: Setter<string>;
-  setShowMessagesButtons: Setter<boolean>;
+  inputRef: HTMLTextAreaElement;
 }
+
 
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
@@ -93,7 +94,7 @@ export default (props: Props) => {
           </div>
         </Show>
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
-          <span onClick={() => { props.setSystemRoleEditing(!props.systemRoleEditing()); inputRef.value = ''; }} class="sys-edit-btn">
+          <span onClick={() => { props.setSystemRoleEditing(!props.systemRoleEditing()); props.inputRef.value = ''; }} class="sys-edit-btn">
             <IconEnv />
             <span>Add AIVA Persona</span>
           </span>
