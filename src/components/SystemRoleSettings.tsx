@@ -133,7 +133,7 @@ export default (props: Props) => {
               Set
             </button>
             <button onClick={handleSysEditBtnClick} gen-slate-btn>
-              X
+              Cancel
             </button>
           </div>
         </div>
