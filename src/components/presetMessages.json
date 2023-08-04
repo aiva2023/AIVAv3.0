@@ -3,7 +3,9 @@
       "category": "🎓 Education",
       "messages": {
         "Bot": "Act as a bot",
-        "Tutor": "Act as a tutor"
+        "Tutor": "Act as a tutor",
+        "Bot2": "Act as a bot",
+        "Tutor2": "Act as a tutor"
       }
     },
     {
