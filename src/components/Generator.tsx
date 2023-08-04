@@ -206,7 +206,8 @@ export default () => {
         setSystemRoleEditing={setSystemRoleEditing}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-        setShowMessagesButtons={setShowMessagesButtons}  // pass setShowMessagesButtons to SystemRoleSettings
+        showMessagesButtons={showMessagesButtons}
+        setShowMessagesButtons={setShowMessagesButtons}
       />
 
 
