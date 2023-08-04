@@ -61,6 +61,6 @@
 }
 
 .gen-message-btn:hover {
-  background-color: #97fa97;
+  background-color: #008000;
   transform: scale(1.1); /* 1.1 is the zoom level, adjust as needed */
 }
