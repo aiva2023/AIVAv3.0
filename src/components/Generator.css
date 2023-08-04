@@ -24,6 +24,13 @@
   
   /* The additional styles you want for .gen-category-btn */
   background-color: gray;
+
+  /* Add hover effect */
+  transition: background-color 0.3s ease;
+}
+
+.gen-category-btn:hover {
+  background-color: #666;
 }
 
 .message-buttons-container {
@@ -47,4 +54,11 @@
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+
+  /* Add hover effect */
+  transition: background-color 0.3s ease;
+}
+
+.gen-message-btn:hover {
+  background-color: #008000;
 }
