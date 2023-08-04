@@ -178,7 +178,6 @@ export default () => {
                   onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
                   className="gen-category-btn"
                   key={`category-${category}`}
-                  disabled={systemRoleEditing()}
                 >
                   {category}
                 </button>
@@ -190,9 +189,10 @@ export default () => {
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
                 <button 
                   onClick={() => { 
-                    setPersonaInput(value); // Change here
-                    setSystemRoleEditing(true); // Open systemRoleEditing
+                    inputRef.value = value; 
                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); 
+                    props.setCurrentSystemRoleSettings(value); // Set the selected message as system role setting
+                    props.setSystemRoleEditing(true); // Open the SystemRoleEditing
                   }} 
                   className="gen-message-btn"
                   key={`presetMessage-${key}`}
@@ -205,7 +205,7 @@ export default () => {
           <p>You can also browse from 100+ templates by typing "/" or set your own AIVA Persona here ⏬</p>
         </div>
       )}
-
+      
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}

@@ -22,6 +22,7 @@ export default () => {
   const [selectedCategory, setSelectedCategory] = createSignal(null)
   const [showMessagesButtons, setShowMessagesButtons] = createSignal(true)
   const [addingPersona, setAddingPersona] = createSignal(false)
+  const [personaInput, setPersonaInput] = createSignal('') // Added this line
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -135,6 +136,7 @@ export default () => {
     setCurrentSystemRoleSettings('')
     setShowMessagesButtons(false)
     setAddingPersona(false)
+    setPersonaInput('') // Add this line
   }
 
   const stopStreamFetch = () => {
@@ -188,7 +190,8 @@ export default () => {
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
                 <button 
                   onClick={() => { 
-                    inputRef.value = value; 
+                    setPersonaInput(value); // Change here
+                    setSystemRoleEditing(true); // Open systemRoleEditing
                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); 
                   }} 
                   className="gen-message-btn"
@@ -212,7 +215,8 @@ export default () => {
         }}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-        setShowMessagesButtons={setShowMessagesButtons} // Add this line
+        personaInput={personaInput} // Add this line
+        setPersonaInput={setPersonaInput} // Add this line
       />
 
       <Index each={messageList()}>
