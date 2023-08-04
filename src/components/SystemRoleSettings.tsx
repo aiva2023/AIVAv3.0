@@ -1,4 +1,4 @@
-import { createSignal, Show, onCleanup } from 'solid-js';
+import { createSignal, Show } from 'solid-js';
 import type { Accessor, Setter } from 'solid-js';
 import IconEnv from './icons/Env';
 import suggestions from './UserRoles.json';
@@ -17,12 +17,6 @@ export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
 
   const [showSuggestions, setShowSuggestions] = createSignal(false);
-
-  onCleanup(() => {
-    if (props.personaInput() && systemInputRef) {
-      systemInputRef.value = props.personaInput();
-    }
-  });
 
   const handleInput = (e) => {
     if (e.target.value.slice(-1) === "/") {
@@ -121,6 +115,7 @@ export default (props: Props) => {
               autofocus
               rows="3"
               gen-textarea
+              value={props.personaInput()}
             />
             <Show when={showSuggestions()}>
               <div class="suggestion-popup">
