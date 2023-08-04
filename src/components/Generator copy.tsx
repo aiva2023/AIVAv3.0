@@ -162,31 +162,7 @@ export default () => {
     }
   }
 
-  // Voice recognition
-  const [transcript, setTranscript] = createSignal('')
-  const [isListening, setIsListening] = createSignal(false)
-
-  const startListening = () => {
-    if (window.SpeechRecognition) {
-      const recognition = new window.SpeechRecognition()
-      recognition.continuous = true
-      recognition.interimResults = true
-
-      recognition.onresult = (event) => {
-        const result = event.results[event.results.length - 1][0].transcript
-        setTranscript(result)
-      }
-
-      recognition.start()
-      setIsListening(true)
-
-      onCleanup(() => {
-        recognition.stop()
-        setIsListening(false)
-      })
-    }
-  }
-
+ 
   return (
     <div my-6>
       { !(messageList().length || currentSystemRoleSettings()) && (
@@ -274,15 +250,9 @@ export default () => {
             rows="1"
             className='gen-textarea'
           />
-
-          <button onClick={startListening} disabled={systemRoleEditing()} className="gen-slate-btn">
-            Listen
-          </button>
-
           <button onClick={handleButtonClick} disabled={systemRoleEditing()} className="gen-slate-btn">
             Send
           </button>
-
           <button title="Clear" onClick={clear} disabled={systemRoleEditing()} className="gen-slate-btn">
             <IconClear />
           </button>
