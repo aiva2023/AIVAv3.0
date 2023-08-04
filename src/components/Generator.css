@@ -26,11 +26,12 @@
   background-color: gray;
 
   /* Add hover effect */
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease; /* 'all' means that all properties will transition */
 }
 
 .gen-category-btn:hover {
   background-color: #666;
+  transform: scale(1.1); /* 1.1 is the zoom level, adjust as needed */
 }
 
 .message-buttons-container {
@@ -56,9 +57,10 @@
   font-size: 16px;
 
   /* Add hover effect */
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease; /* 'all' means that all properties will transition */
 }
 
 .gen-message-btn:hover {
-  background-color: #008000;
+  background-color: #97fa97;
+  transform: scale(1.1); /* 1.1 is the zoom level, adjust as needed */
 }
