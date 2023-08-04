@@ -206,12 +206,13 @@ export default () => {
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
-        setSystemRoleEditing={setSystemRoleEditing}
+        setSystemRoleEditing={(editing) => {
+          setAddingPersona(editing);
+          setSystemRoleEditing(editing);
+        }}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-        inputRef={inputRef} // Pass the reference to the input field as a prop
       />
-
 
       <Index each={messageList()}>
         {(message, index) => (
