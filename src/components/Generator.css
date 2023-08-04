@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  height: calc(3 * (60px + 2*5px)); /* adjust the height according to your message button's height */
+  height: calc(2 * 60px); /* adjust the height according to your message button's height */
   scrollbar-width: thin;
   scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
 }
