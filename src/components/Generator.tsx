@@ -191,6 +191,7 @@ export default () => {
                 <button 
                   onClick={() => { 
                     setPersonaInput(value); // Change here
+                    setSystemRoleEditing(true); // Open systemRoleEditing
                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); 
                   }} 
                   className="gen-message-btn"
@@ -214,7 +215,6 @@ export default () => {
         }}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-        setShowMessagesButtons={setShowMessagesButtons}
         personaInput={personaInput} // Add this line
         setPersonaInput={setPersonaInput} // Add this line
       />
