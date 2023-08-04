@@ -9,7 +9,7 @@ interface Props {
   setSystemRoleEditing: Setter<boolean>;
   currentSystemRoleSettings: Accessor<string>;
   setCurrentSystemRoleSettings: Setter<string>;
-  setShowMessagesButtons: Setter<boolean>;  // Add this line
+  setShowMessagesButtons: Setter<boolean>;
 }
 
 export default (props: Props) => {
@@ -34,7 +34,7 @@ export default (props: Props) => {
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value);
     props.setSystemRoleEditing(false);
-    props.setShowMessagesButtons(false);  // Add this line
+    props.setShowMessagesButtons(false); // hide the messages buttons
   };
 
   return (
