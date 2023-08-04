@@ -1,4 +1,4 @@
-import { createSignal, Show, onMount } from 'solid-js';
+import { createSignal, Show, onCleanup } from 'solid-js';
 import type { Accessor, Setter } from 'solid-js';
 import IconEnv from './icons/Env';
 import suggestions from './UserRoles.json';
@@ -18,9 +18,8 @@ export default (props: Props) => {
 
   const [showSuggestions, setShowSuggestions] = createSignal(false);
 
-  // New onMount block
-  onMount(() => {
-    if (props.personaInput()) {
+  onCleanup(() => {
+    if (props.personaInput() && systemInputRef) {
       systemInputRef.value = props.personaInput();
     }
   });
