@@ -206,8 +206,9 @@ export default () => {
         setSystemRoleEditing={setSystemRoleEditing}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-        setShowMessagesButtons={setShowMessagesButtons}
+        setShowMessagesButtons={setShowMessagesButtons}  // pass setShowMessagesButtons to SystemRoleSettings
       />
+
 
       <Index each={messageList()}>
         {(message, index) => (
