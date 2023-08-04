@@ -77,7 +77,7 @@ export default (props: Props) => {
           <div>
             <div class="fi gap-1 op-50 dark:op-60">
               <IconEnv />
-              <span>System Role:</span>
+              <span>AIVA Persona:</span>
             </div>
             <div class="mt-1">
               { props.currentSystemRoleSettings() }
