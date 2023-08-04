@@ -92,7 +92,7 @@ export default () => {
         const { value, done: readerDone } = await reader.read()
         if (value) {
           let char = decoder.decode(value)
-          if (char === '\n' && currentAssistantMessage().endsWith('\n')) {
+          if (char === '\\n' && currentAssistantMessage().endsWith('\\n')) {
             continue
           }
           if (char) {
@@ -164,10 +164,6 @@ export default () => {
     }
   }
 
-  const clearInput = () => {
-    inputRef.value = '';
-  }
- 
   return (
     <div my-6>
       { !(messageList().length || currentSystemRoleSettings()) && (
@@ -180,6 +176,7 @@ export default () => {
                   onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
                   className="gen-category-btn"
                   key={`category-${category}`}
+                  disabled={systemRoleEditing()}
                 >
                   {category}
                 </button>
@@ -202,7 +199,7 @@ export default () => {
               ))}
             </div>
           }
-          <p>You can also browse from 100+ templates or set your own AIVA Persona here ⏬</p>
+          <p>You can also browse from 100+ templates by typing "/" or set your own AIVA Persona here ⏬</p>
         </div>
       )}
 
@@ -215,7 +212,7 @@ export default () => {
         }}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-        clearInput={clearInput}
+        setShowMessagesButtons={setShowMessagesButtons} // Add this line
       />
 
       <Index each={messageList()}>
