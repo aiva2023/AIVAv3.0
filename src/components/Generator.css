@@ -42,3 +42,12 @@
   font-size: 16px;
   overflow: auto; /* Makes the content scrollable if it overflows the element's box */
 }
+.button-container {
+  display: flex;
+  flex-direction: column; /* stack the buttons vertically */
+  overflow-y: auto; /* make it scrollable vertically */
+  height: calc(3 * (40px + 2*5px)); /* height of 3 buttons, adjust as needed */
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.7) transparent;
+}
