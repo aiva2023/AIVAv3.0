@@ -19,6 +19,7 @@ export default (props: Props) => {
   const handleInput = (e) => {
     if (e.target.value.slice(-1) === "/") {
       setShowSuggestions(true);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); 
     } else {
       setShowSuggestions(false);
     }
@@ -93,8 +94,7 @@ export default (props: Props) => {
       </Show>
       <Show when={props.systemRoleEditing() && props.canEdit()}>
         <div>
-
-        <div class="fi gap-1 op-50 dark:op-60">
+          <div class="fi gap-1 op-50 dark:op-60">
             <IconEnv />
             <span>AIVA Persona:</span>
           </div>
