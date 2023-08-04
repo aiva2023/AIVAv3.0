@@ -37,6 +37,11 @@ export default (props: Props) => {
     props.setShowMessagesButtons(false); // Add this line
   };
 
+  const handleSysEditBtnClick = () => {
+    props.setSystemRoleEditing(!props.systemRoleEditing());
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Add this line
+  };
+
   return (
     <div class="my-4">
       <style>
@@ -88,7 +93,7 @@ export default (props: Props) => {
           </div>
         </Show>
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
-          <span onClick={() => props.setSystemRoleEditing(!props.systemRoleEditing())} class="sys-edit-btn">
+          <span onClick={handleSysEditBtnClick} class="sys-edit-btn"> {/* Update here */}
             <IconEnv />
             <span>Add AIVA Persona</span>
           </span>
