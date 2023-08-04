@@ -95,7 +95,7 @@ export default (props: Props) => {
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
           <span onClick={handleSysEditBtnClick} class="sys-edit-btn">
             <IconEnv />
-            <span>Add AIVA Persona</span>
+            <span>Set AIVA Persona</span>
           </span>
         </Show>
       </Show>

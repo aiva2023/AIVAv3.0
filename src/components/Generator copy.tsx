@@ -178,7 +178,6 @@ export default () => {
                   onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
                   className="gen-category-btn"
                   key={`category-${category}`}
-                  disabled={systemRoleEditing()}
                 >
                   {category}
                 </button>
@@ -207,7 +206,7 @@ export default () => {
       )}
 
       <SystemRoleSettings
-        canEdit={() => messageList().length === 0}
+        canEdit={() => true}
         systemRoleEditing={systemRoleEditing}
         setSystemRoleEditing={(editing) => {
           setAddingPersona(editing);

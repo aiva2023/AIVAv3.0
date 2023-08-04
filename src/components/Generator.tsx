@@ -170,7 +170,7 @@ export default () => {
     <div my-6>
       { !(messageList().length || currentSystemRoleSettings()) && (
         <div>
-          <p>Welcome! Send your first message to start or choose from the suggestions below:</p>
+          <p>Welcome! Send your first message to start or choose from the AIVA persona suggestions below:</p>
           <div class="button-container">
             {presetMessages.map(({category, messages}) => (
               <div>
@@ -201,7 +201,8 @@ export default () => {
               ))}
             </div>
           }
-          <p>You can also browse from 100+ templates by typing "/" or set your own AIVA Persona here ⏬</p>
+          </br>
+          <p>You can also browse from 150+ templates by typing "/" or set your own AIVA Persona here ⏬</p>
         </div>
       )}
 
