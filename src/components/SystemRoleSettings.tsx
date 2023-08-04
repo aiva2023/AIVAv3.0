@@ -9,12 +9,12 @@ interface Props {
   setSystemRoleEditing: Setter<boolean>;
   currentSystemRoleSettings: Accessor<string>;
   setCurrentSystemRoleSettings: Setter<string>;
-  showMessagesButtons: Accessor<boolean>;
   setShowMessagesButtons: Setter<boolean>;
 }
 
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
+
   const [showSuggestions, setShowSuggestions] = createSignal(false);
 
   const handleInput = (e) => {
@@ -34,9 +34,9 @@ export default (props: Props) => {
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value);
     props.setSystemRoleEditing(false);
-    props.setShowMessagesButtons(false); // Hide the messages buttons
+    props.setShowMessagesButtons(false); // Add this line
   };
-  
+
   return (
     <div class="my-4">
       <style>
