@@ -1,4 +1,4 @@
-import { createSignal, Show } from 'solid-js';
+import { createSignal, Show, onMount } from 'solid-js';
 import type { Accessor, Setter } from 'solid-js';
 import IconEnv from './icons/Env';
 import suggestions from './UserRoles.json';
@@ -10,12 +10,20 @@ interface Props {
   currentSystemRoleSettings: Accessor<string>;
   setCurrentSystemRoleSettings: Setter<string>;
   setShowMessagesButtons: Setter<boolean>;
+  personaInput: Accessor<string>;
 }
 
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
 
   const [showSuggestions, setShowSuggestions] = createSignal(false);
+
+  // New onMount block
+  onMount(() => {
+    if (props.personaInput()) {
+      systemInputRef.value = props.personaInput();
+    }
+  });
 
   const handleInput = (e) => {
     if (e.target.value.slice(-1) === "/") {
@@ -37,8 +45,9 @@ export default (props: Props) => {
     props.setShowMessagesButtons(false);
   };
 
-  const handleCancelClick = () => {
-    props.setSystemRoleEditing(false);
+  const handleSysEditBtnClick = () => {
+    props.setSystemRoleEditing(!props.systemRoleEditing());
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   };
 
   return (
@@ -54,14 +63,13 @@ export default (props: Props) => {
             border: 1px solid #ccc;
             padding: 10px;
             color: #000;
-            /* Add additional styling as needed */
           }
           .suggestion-popup div {
             transition: transform 0.3s ease;
           }
           .suggestion-popup div:hover {
             transform: scale(1.03);
-            background-color: #ddd; /* Change color as needed */
+            background-color: #ddd;
             cursor: pointer;
           }
           @media (prefers-color-scheme: dark) {
@@ -70,7 +78,7 @@ export default (props: Props) => {
               color: #fff;
             }
             .suggestion-popup div {
-              color: #000; /* Font color in dark theme */
+              color: #000;
             }
             .suggestion-popup div:hover {
               background-color: #555;
@@ -92,13 +100,7 @@ export default (props: Props) => {
           </div>
         </Show>
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
-          <span 
-            onClick={() => {
-              props.setSystemRoleEditing(!props.systemRoleEditing()); 
-              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            }} 
-            class="sys-edit-btn"
-          >
+          <span onClick={handleSysEditBtnClick} class="sys-edit-btn">
             <IconEnv />
             <span>Add AIVA Persona</span>
           </span>
@@ -131,12 +133,14 @@ export default (props: Props) => {
               </div>
             </Show>
           </div>
-          <button onClick={handleButtonClick} class="gen-slate-btn mr-2">
-            Set
-          </button>
-          <button onClick={handleCancelClick} class="gen-slate-btn">
-            Cancel
-          </button>
+          <div class="flex items-center gap-2">
+            <button onClick={handleButtonClick} gen-slate-btn>
+              Set
+            </button>
+            <button onClick={handleSysEditBtnClick} class="gen-slate-btn cancel-button">
+              Cancel
+            </button>
+          </div>
         </div>
       </Show>
     </div>
