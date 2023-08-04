@@ -10,20 +10,12 @@ interface Props {
   currentSystemRoleSettings: Accessor<string>;
   setCurrentSystemRoleSettings: Setter<string>;
   setShowMessagesButtons: Setter<boolean>;
-  personaInput: Accessor<string>; // Add this line
 }
 
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement;
 
   const [showSuggestions, setShowSuggestions] = createSignal(false);
-
-  // New onMount block
-  onMount(() => {
-    if (props.personaInput()) {
-      systemInputRef.value = props.personaInput();
-    }
-  });
 
   const handleInput = (e) => {
     if (e.target.value.slice(-1) === "/") {
@@ -42,12 +34,7 @@ export default (props: Props) => {
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value);
     props.setSystemRoleEditing(false);
-    props.setShowMessagesButtons(false); // Add this line
-  };
-
-  const handleSysEditBtnClick = () => {
-    props.setSystemRoleEditing(!props.systemRoleEditing());
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Add this line
+    props.setShowMessagesButtons(false);
   };
 
   const handleCancelClick = () => {
