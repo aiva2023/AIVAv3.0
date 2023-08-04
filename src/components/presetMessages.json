@@ -1,38 +1,80 @@
 [
     {
-      "category": "🎓Category1",
+      "category": "🎓 Education",
       "messages": {
         "Bot": "Act as a bot",
         "Tutor": "Act as a tutor"
       }
     },
     {
-      "category": "Category2",
+      "category": "🍎 Health & Nutrition",
       "messages": {
         "Guide": "Act as a guide",
         "Mentor": "Act as a mentor"
       }
     },
     {
-        "category": "Category3",
+        "category": "🌍 Travel",
         "messages": {
           "Bot": "Act as a bot",
           "Tutor": "Act as a tutor"
         }
       },
       {
-        "category": "Category4",
+        "category": "💼 Career",
         "messages": {
           "Bot": "Act as a bot",
           "Tutor": "Act as a tutor"
         }
       },
       {
-        "category": "Category5",
+        "category": "🤝 Social",
         "messages": {
           "Bot": "Act as a bot",
           "Tutor": "Act as a tutor"
         }
-      }
+      },
+      {
+        "category": "😄 Fun",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
+      {
+        "category": "🌞 Daily Life Style",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
+      {
+        "category": "🖌️ Art",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
+      {
+        "category": "💰 Business & Marketing",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
+      {
+        "category": "📧 E-Mail",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
+      {
+        "category": "🔮 Astrology",
+        "messages": {
+          "Bot": "Act as a bot",
+          "Tutor": "Act as a tutor"
+        }
+      },
   ]
   
