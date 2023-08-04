@@ -164,6 +164,9 @@ export default () => {
     }
   }
 
+  const clearInput = () => {
+    inputRef.value = '';
+  }
  
   return (
     <div my-6>
@@ -212,6 +215,7 @@ export default () => {
         }}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
+        clearInput={clearInput}
       />
 
       <Index each={messageList()}>
