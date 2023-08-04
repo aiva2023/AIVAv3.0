@@ -1,65 +1,65 @@
-import type { ChatMessage, ErrorMessage } from '@/types'
-import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
-import IconClear from './icons/Clear'
-import MessageItem from './MessageItem'
-import SystemRoleSettings from './SystemRoleSettings'
-import ErrorMessageItem from './ErrorMessageItem'
-import { generateSignature } from '@/utils/auth'
-import { useThrottleFn } from 'solidjs-use'
-import './Generator.css'
-import presetMessages from './presetMessages.json'
+import type { ChatMessage, ErrorMessage } from '@/types';
+import { createSignal, Index, Show } from 'solid-js';
+import IconClear from './icons/Clear';
+import MessageItem from './MessageItem';
+import SystemRoleSettings from './SystemRoleSettings';
+import ErrorMessageItem from './ErrorMessageItem';
+import { generateSignature } from '@/utils/auth';
+import { useThrottleFn } from 'solidjs-use';
+import './Generator.css';
+import presetMessages from './presetMessages.json';
 
 export default () => {
-  let inputRef: HTMLTextAreaElement
-  const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
-  const [systemRoleEditing, setSystemRoleEditing] = createSignal(false)
-  const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
-  const [currentError, setCurrentError] = createSignal<ErrorMessage>()
-  const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
-  const [loading, setLoading] = createSignal(false)
-  const [controller, setController] = createSignal<AbortController>(null)
-  const [firstMessageSent, setFirstMessageSent] = createSignal(false)
-  const [selectedCategory, setSelectedCategory] = createSignal(null)
-  const [showMessagesButtons, setShowMessagesButtons] = createSignal(true)
+  let inputRef: HTMLTextAreaElement;
+  const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('');
+  const [systemRoleEditing, setSystemRoleEditing] = createSignal(false);
+  const [messageList, setMessageList] = createSignal<ChatMessage[]>([]);
+  const [currentError, setCurrentError] = createSignal<ErrorMessage>();
+  const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('');
+  const [loading, setLoading] = createSignal(false);
+  const [controller, setController] = createSignal<AbortController>(null);
+  const [firstMessageSent, setFirstMessageSent] = createSignal(false);
+  const [selectedCategory, setSelectedCategory] = createSignal(null);
+  const [showMessagesButtons, setShowMessagesButtons] = createSignal(true);
 
   const handleButtonClick = async () => {
-    const inputValue = inputRef.value
+    const inputValue = inputRef.value;
     if (!inputValue) {
-      return
+      return;
     }
-    if (window?.umami) umami.trackEvent('chat_generate')
-    inputRef.value = ''
+    if (window?.umami) umami.trackEvent('chat_generate');
+    inputRef.value = '';
     setMessageList([
       ...messageList(),
       {
         role: 'user',
         content: inputValue,
       },
-    ])
-    requestWithLatestMessage()
-    setFirstMessageSent(true)
-  }
+    ]);
+    requestWithLatestMessage();
+    setFirstMessageSent(true);
+  };
 
   const smoothToBottom = useThrottleFn(() => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-  }, 300, false, true)
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }, 300, false, true);
 
   const requestWithLatestMessage = async () => {
-    setLoading(true)
-    setCurrentAssistantMessage('')
-    setCurrentError(null)
-    const storagePassword = localStorage.getItem('pass')
+    setLoading(true);
+    setCurrentAssistantMessage('');
+    setCurrentError(null);
+    const storagePassword = localStorage.getItem('pass');
     try {
-      const controller = new AbortController()
-      setController(controller)
-      const requestMessageList = [...messageList()]
+      const controller = new AbortController();
+      setController(controller);
+      const requestMessageList = [...messageList()];
       if (currentSystemRoleSettings()) {
         requestMessageList.unshift({
           role: 'system',
           content: currentSystemRoleSettings(),
-        })
+        });
       }
-      const timestamp = Date.now()
+      const timestamp = Date.now();
       const response = await fetch('/api/generate', {
         method: 'POST',
         body: JSON.stringify({
@@ -72,43 +72,43 @@ export default () => {
           }),
         }),
         signal: controller.signal,
-      })
+      });
       if (!response.ok) {
-        const error = await response.json()
-        console.error(error.error)
-        setCurrentError(error.error)
-        throw new Error('Request failed')
+        const error = await response.json();
+        console.error(error.error);
+        setCurrentError(error.error);
+        throw new Error('Request failed');
       }
-      const data = response.body
+      const data = await response.json();
       if (!data) {
-        throw new Error('No data')
+        throw new Error('No data');
       }
-      const reader = data.getReader()
-      const decoder = new TextDecoder('utf-8')
-      let done = false
+      const reader = data.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let done = false;
 
       while (!done) {
-        const { value, done: readerDone } = await reader.read()
+        const { value, done: readerDone } = await reader.read();
         if (value) {
-          let char = decoder.decode(value)
+          let char = decoder.decode(value);
           if (char === '\n' && currentAssistantMessage().endsWith('\n')) {
-            continue
+            continue;
           }
           if (char) {
-            setCurrentAssistantMessage(currentAssistantMessage() + char)
+            setCurrentAssistantMessage(currentAssistantMessage() + char);
           }
-          smoothToBottom()
+          smoothToBottom();
         }
-        done = readerDone
+        done = readerDone;
       }
     } catch (e) {
-      console.error(e)
-      setLoading(false)
-      setController(null)
-      return
+      console.error(e);
+      setLoading(false);
+      setController(null);
+      return;
     }
-    archiveCurrentMessage()
-  }
+    archiveCurrentMessage();
+  };
 
   const archiveCurrentMessage = () => {
     if (currentAssistantMessage()) {
@@ -118,51 +118,50 @@ export default () => {
           role: 'assistant',
           content: currentAssistantMessage(),
         },
-      ])
-      setCurrentAssistantMessage('')
-      setLoading(false)
-      setController(null)
-      inputRef.focus()
+      ]);
+      setCurrentAssistantMessage('');
+      setLoading(false);
+      setController(null);
+      inputRef.focus();
     }
-  }
+  };
 
   const clear = () => {
-    inputRef.value = ''
-    inputRef.style.height = 'auto'
-    setMessageList([])
-    setCurrentAssistantMessage('')
-    setCurrentSystemRoleSettings('')
-    setShowMessagesButtons(false)
-  }
+    inputRef.value = '';
+    inputRef.style.height = 'auto';
+    setMessageList([]);
+    setCurrentAssistantMessage('');
+    setCurrentSystemRoleSettings('');
+    setShowMessagesButtons(false);
+  };
 
   const stopStreamFetch = () => {
     if (controller()) {
-      controller().abort()
-      archiveCurrentMessage()
+      controller().abort();
+      archiveCurrentMessage();
     }
-  }
+  };
 
   const retryLastFetch = () => {
     if (messageList().length > 0) {
-      const lastMessage = messageList()[messageList().length - 1]
-      console.log(lastMessage)
+      const lastMessage = messageList()[messageList().length - 1];
+      console.log(lastMessage);
       if (lastMessage.role === 'assistant') {
-        setMessageList(messageList().slice(0, -1))
+        setMessageList(messageList().slice(0, -1));
       }
-      requestWithLatestMessage()
+      requestWithLatestMessage();
     }
-  }
+  };
 
   const handleKeydown = (e: KeyboardEvent) => {
     if (e.isComposing || e.shiftKey) {
-      return
+      return;
     }
     if (e.key === 'Enter') {
-      handleButtonClick()
+      handleButtonClick();
     }
-  }
+  };
 
- 
   return (
     <div my-6>
       { !(messageList().length || currentSystemRoleSettings()) && (
@@ -181,7 +180,7 @@ export default () => {
               </div>
             ))}
           </div>
-          {showMessagesButtons() && selectedCategory() && 
+          {showMessagesButtons() && selectedCategory() &&
             <div className="message-buttons-container">
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
                 <button 
@@ -207,6 +206,7 @@ export default () => {
         setSystemRoleEditing={setSystemRoleEditing}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
+        setShowMessagesButtons={setShowMessagesButtons}
       />
 
       <Index each={messageList()}>
@@ -259,5 +259,5 @@ export default () => {
         </div>
       </Show>
     </div>
-  )
-}
+  );
+};
