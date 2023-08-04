@@ -41,4 +41,5 @@
   text-decoration: none;
   font-size: 16px;
   max-height: 200px;
+  overflow: auto; /* Makes the content scrollable if it overflows the element's box */
 }
