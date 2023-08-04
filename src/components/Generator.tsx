@@ -201,7 +201,7 @@ export default () => {
               ))}
             </div>
           }
-          <p style="margin-top: 20px;">
+          <p style="margin-top: 5px;">
             You can also browse from 150+ templates by typing "/" or set your own AIVA Persona here ⏬
           </p> 
         </div>
