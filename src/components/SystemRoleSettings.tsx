@@ -10,7 +10,6 @@ interface Props {
   currentSystemRoleSettings: Accessor<string>;
   setCurrentSystemRoleSettings: Setter<string>;
   setShowMessagesButtons: Setter<boolean>;
-  clearInput: () => void;
 }
 
 export default (props: Props) => {
@@ -35,13 +34,11 @@ export default (props: Props) => {
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value);
     props.setSystemRoleEditing(false);
-    props.setShowMessagesButtons(false); // Add this line
-    props.clearInput(); // Add this line
+    props.setShowMessagesButtons(false);
   };
 
-  const handleSysEditBtnClick = () => {
-    props.setSystemRoleEditing(!props.systemRoleEditing());
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Add this line
+  const handleCancelClick = () => {
+    props.setSystemRoleEditing(false);
   };
 
   return (
@@ -95,7 +92,7 @@ export default (props: Props) => {
           </div>
         </Show>
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
-          <span onClick={handleSysEditBtnClick} class="sys-edit-btn"> {/* Update here */}
+          <span onClick={() => props.setSystemRoleEditing(!props.systemRoleEditing())} class="sys-edit-btn">
             <IconEnv />
             <span>Add AIVA Persona</span>
           </span>
@@ -128,14 +125,12 @@ export default (props: Props) => {
               </div>
             </Show>
           </div>
-          <div>
-            <button onClick={handleButtonClick} gen-slate-btn>
-              Set
-            </button>
-            <button onClick={handleSysEditBtnClick} gen-slate-btn>
-              Cancel
-            </button>
-          </div>
+          <button onClick={handleButtonClick} class="gen-slate-btn mx-2">
+            Set
+          </button>
+          <button onClick={handleCancelClick} class="gen-slate-btn mx-2">
+            Cancel
+          </button>
         </div>
       </Show>
     </div>

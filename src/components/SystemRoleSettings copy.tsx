@@ -9,8 +9,8 @@ interface Props {
   setSystemRoleEditing: Setter<boolean>;
   currentSystemRoleSettings: Accessor<string>;
   setCurrentSystemRoleSettings: Setter<string>;
-  clearInput: () => void;
   setShowMessagesButtons: Setter<boolean>;
+  clearInput: () => void;
 }
 
 export default (props: Props) => {
@@ -36,11 +36,11 @@ export default (props: Props) => {
     props.setCurrentSystemRoleSettings(systemInputRef.value);
     props.setSystemRoleEditing(false);
     props.setShowMessagesButtons(false); // Add this line
+    props.clearInput(); // Add this line
   };
 
   const handleSysEditBtnClick = () => {
     props.setSystemRoleEditing(!props.systemRoleEditing());
-    props.clearInput();  // Clear input on "Add AIVA Persona" button click
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Add this line
   };
 
@@ -128,9 +128,14 @@ export default (props: Props) => {
               </div>
             </Show>
           </div>
-          <button onClick={handleButtonClick} gen-slate-btn>
-            Set
-          </button>
+          <div>
+            <button onClick={handleButtonClick} gen-slate-btn>
+              Set
+            </button>
+            <button onClick={handleSysEditBtnClick} gen-slate-btn>
+              Cancel
+            </button>
+          </div>
         </div>
       </Show>
     </div>
