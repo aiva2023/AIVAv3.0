@@ -1,5 +1,5 @@
 import type { ChatMessage, ErrorMessage } from '@/types'
-import { createSignal, Index, Show, onCleanup } from 'solid-js'
+import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
@@ -21,30 +21,6 @@ export default () => {
   const [firstMessageSent, setFirstMessageSent] = createSignal(false)
   const [selectedCategory, setSelectedCategory] = createSignal(null)
   const [showMessagesButtons, setShowMessagesButtons] = createSignal(true)
-  
-  // Voice recognition
-  const [isListening, setIsListening] = createSignal(false)
-
-  const startListening = () => {
-    if (window.SpeechRecognition) {
-      const recognition = new window.SpeechRecognition()
-      recognition.continuous = true
-      recognition.interimResults = true
-
-      recognition.onresult = (event) => {
-        const result = event.results[event.results.length - 1][0].transcript
-        inputRef.value = result  // Set the input value to the transcript
-      }
-
-      recognition.start()
-      setIsListening(true)
-
-      onCleanup(() => {
-        recognition.stop()
-        setIsListening(false)
-      })
-    }
-  }
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -186,6 +162,7 @@ export default () => {
     }
   }
 
+ 
   return (
     <div my-6>
       { !(messageList().length || currentSystemRoleSettings()) && (
@@ -273,15 +250,9 @@ export default () => {
             rows="1"
             className='gen-textarea'
           />
-
-          <button onClick={startListening} disabled={systemRoleEditing()} className="gen-slate-btn">
-            {isListening() ? 'Listening...' : 'Listen'}
-          </button>
-
           <button onClick={handleButtonClick} disabled={systemRoleEditing()} className="gen-slate-btn">
             Send
           </button>
-
           <button title="Clear" onClick={clear} disabled={systemRoleEditing()} className="gen-slate-btn">
             <IconClear />
           </button>
