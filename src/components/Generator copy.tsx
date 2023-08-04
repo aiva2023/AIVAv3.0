@@ -21,6 +21,7 @@ export default () => {
   const [firstMessageSent, setFirstMessageSent] = createSignal(false)
   const [selectedCategory, setSelectedCategory] = createSignal(null)
   const [showMessagesButtons, setShowMessagesButtons] = createSignal(true)
+  const [addingPersona, setAddingPersona] = createSignal(false)
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -133,6 +134,7 @@ export default () => {
     setCurrentAssistantMessage('')
     setCurrentSystemRoleSettings('')
     setShowMessagesButtons(false)
+    setAddingPersona(false)
   }
 
   const stopStreamFetch = () => {
@@ -172,7 +174,7 @@ export default () => {
             {presetMessages.map(({category, messages}) => (
               <div>
                 <button 
-                  onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); }} 
+                  onClick={() => { setSelectedCategory(category); setShowMessagesButtons(true); setAddingPersona(false); }} 
                   className="gen-category-btn"
                   key={`category-${category}`}
                 >
@@ -181,7 +183,7 @@ export default () => {
               </div>
             ))}
           </div>
-          {showMessagesButtons() && selectedCategory() && 
+          {showMessagesButtons() && !addingPersona() && selectedCategory() && 
             <div className="message-buttons-container">
               {Object.entries(presetMessages.find(({category}) => category === selectedCategory()).messages).map(([key, value]) => (
                 <button 
@@ -204,7 +206,10 @@ export default () => {
       <SystemRoleSettings
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
-        setSystemRoleEditing={setSystemRoleEditing}
+        setSystemRoleEditing={(editing) => {
+          setAddingPersona(editing);
+          setSystemRoleEditing(editing);
+        }}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />

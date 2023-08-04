@@ -9,6 +9,7 @@ interface Props {
   setSystemRoleEditing: Setter<boolean>;
   currentSystemRoleSettings: Accessor<string>;
   setCurrentSystemRoleSettings: Setter<string>;
+  setShowMessagesButtons: Setter<boolean>;
 }
 
 export default (props: Props) => {
@@ -33,6 +34,12 @@ export default (props: Props) => {
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value);
     props.setSystemRoleEditing(false);
+    props.setShowMessagesButtons(false); // Add this line
+  };
+
+  const handleSysEditBtnClick = () => {
+    props.setSystemRoleEditing(!props.systemRoleEditing());
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Add this line
   };
 
   return (
@@ -86,7 +93,7 @@ export default (props: Props) => {
           </div>
         </Show>
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
-          <span onClick={() => props.setSystemRoleEditing(!props.systemRoleEditing())} class="sys-edit-btn">
+          <span onClick={handleSysEditBtnClick} class="sys-edit-btn"> {/* Update here */}
             <IconEnv />
             <span>Add AIVA Persona</span>
           </span>
