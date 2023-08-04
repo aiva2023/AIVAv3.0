@@ -125,10 +125,10 @@ export default (props: Props) => {
               </div>
             </Show>
           </div>
-          <button onClick={handleButtonClick} class="gen-slate-btn mx-2">
+          <button onClick={handleButtonClick} class="gen-slate-btn mr-2">
             Set
           </button>
-          <button onClick={handleCancelClick} class="gen-slate-btn mx-2">
+          <button onClick={handleCancelClick} class="gen-slate-btn">
             Cancel
           </button>
         </div>
