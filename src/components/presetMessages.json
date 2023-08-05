@@ -330,7 +330,7 @@
         }
       } ,
       {
-        "category": "📝🎓📚 Lesson Plan",
+        "category": "👩‍🏫📚🎓 Lesson Plan",
         "messages": {
           "AI Learning Objective Developer": "Act as an AI Learning Objective Developer. I need to define clear, measurable learning objectives for my upcoming lesson. Can you guide me in creating effective and appropriate objectives? I will type 'begin', and you will start the conversation.",
 
@@ -350,7 +350,7 @@
         }
       },
       {
-        "category": "📝🎓📚 Japan Life",
+        "category": "🇯🇵🏯🌸 Japan Life",
         "messages": {
           "AI Japanese Culture Mentor": "Act as an AI Japanese Culture Mentor. I'm a foreigner living in Japan and I want to understand Japanese culture and social norms better to integrate smoothly. Can you give me some insights and tips? I will type 'begin', and you will start the conversation.",
 
