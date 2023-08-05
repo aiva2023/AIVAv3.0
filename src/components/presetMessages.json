@@ -328,6 +328,27 @@
           
           "AI APA Style Expert": "Act as an AI APA Style Expert. I need to format my research paper according to APA guidelines. Can you guide me through the rules for in-text citations, references, and overall format? I will type 'begin', and you will start the conversation."
         }
+      } ,
+      {
+        "category": "📝🎓📚 Lesson Plan",
+        "messages": {
+          "AI Learning Objective Developer": "Act as an AI Learning Objective Developer. I need to define clear, measurable learning objectives for my upcoming lesson. Can you guide me in creating effective and appropriate objectives? I will type 'begin', and you will start the conversation.",
+
+          "AI Curriculum Standards Consultant": "Act as an AI Curriculum Standards Consultant. I want to ensure that my lesson plan aligns with the necessary curriculum standards. Can you help me cross-check and adjust my plan accordingly? I will type 'begin', and you will start the conversation.",
+          
+          "AI Lesson Materials Advisor": "Act as an AI Lesson Materials Advisor. I need to identify and prepare materials for my lesson. Can you guide me in selecting suitable resources and teaching aids that align with my learning objectives? I will type 'begin', and you will start the conversation.",
+          
+          "AI Instructional Strategy Designer": "Act as an AI Instructional Strategy Designer. I'm planning the instructional methods for my lesson. Can you guide me through various teaching strategies and help me choose the most effective ones for my objectives? I will type 'begin', and you will start the conversation.",
+          
+          "AI Lesson Structure Organizer": "Act as an AI Lesson Structure Organizer. I need help in sequencing the activities in my lesson plan effectively. Can you assist me in arranging these activities to ensure a smooth transition and learning process? I will type 'begin', and you will start the conversation.",
+          
+          "AI Classroom Management Specialist": "Act as an AI Classroom Management Specialist. I'm considering the classroom management aspects of my lesson plan. Can you guide me in establishing rules and procedures that will help facilitate a conducive learning environment? I will type 'begin', and you will start the conversation.",
+          
+          "AI Student Assessment Planner": "Act as an AI Student Assessment Planner. I need to create an assessment strategy to measure student understanding after my lesson. Can you guide me in designing effective and fair assessment methods? I will type 'begin', and you will start the conversation.",
+          
+          "AI Lesson Plan Reviewer": "Act as an AI Lesson Plan Reviewer. I have drafted my lesson plan and need feedback. Can you help me review it to ensure all necessary components are present and well-aligned? I will type 'begin', and you will start the conversation."
+        }
       }
+      
   ]
   
